@@ -1,0 +1,43 @@
+DefaultContentLanguage: en
+languageCode: "en"
+title: "My New Hugo Site"
+theme: "talend"
+relativeURLs: true
+
+languages:
+  en:
+    title: "My New Hugo Site translated"
+    weight: 1
+
+module:
+  mounts:
+  - source: apis
+    target: content/apis
+  - source: content
+    target: content
+  - source: static
+    target: static
+  - source: layouts
+    target: layouts
+  - source: data
+    target: data
+  - source: assets
+    target: assets
+  - source: i18n
+    target: i18n
+  - source: archetypes
+    target: archetypes
+
+menu:
+  footer:
+  - identifier: termsOfUse
+    name: Terms of use
+    url: /termsOfUse/
+
+params:
+  favicon:
+    url: /img/talend.svg
+  logo:
+    url: /img/talend.svg
+  copyright:
+    label: © Talend 2020. All rights reserved

@@ -1,0 +1,96 @@
+{{ $section := .Type -}}
+{{ $apiPages := where .Site.RegularPages "Type" "eq" $section -}}
+
+{{ $site := .Site -}}
+{{- with (index .Site.Data "api-catalog") -}}
+    {{/* Display the APIs linked to the "default" domain at the top of the catalog */}}
+    {{- range . -}}
+        {{- range $domainName, $apiNames := . -}}
+            {{- if eq $domainName "default" -}}
+<section class="domain">
+                {{ $unsortedApisPages := slice -}}
+                {{- range $apiNames -}}
+                    {{ $prefix := print $section "/" . "/" -}}
+                    {{- range $apiPages -}}
+                        {{ if (hasPrefix .File.Dir $prefix) -}}
+                            {{ $unsortedApisPages = $unsortedApisPages | append . -}}
+                        {{- end -}}
+                    {{- end -}} 
+                {{- end -}}
+                {{- partial "partials/apis/inline-api-cards" $unsortedApisPages  -}}
+</section>
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+    {{- range . -}}
+        {{/* Display all the other domains */}}
+        {{- range $domainName, $apiNames := . -}}
+<section class="domain">
+            {{- if ne $domainName "default" -}}
+    <h2 class="domain__title">{{ $domainName -}}</h2>
+                {{ $domainApisPages := slice -}}
+                {{- range $apiNames -}}
+                    {{ $prefix := print $section "/" . "/" -}}
+                    {{- range $apiPages -}}
+                        {{ if (hasPrefix .File.Dir $prefix) -}}
+                            {{ $domainApisPages = $domainApisPages | append . -}}
+                        {{- end -}}
+                    {{- end -}} 
+                {{- end -}}
+                {{- partial "partials/apis/inline-api-cards" $domainApisPages  -}}
+            {{- end -}}
+        {{- end -}}
+</section>
+    {{- end -}}
+{{- else -}}
+    {{- partial "partials/apis/inline-api-cards" $apiPages  -}}
+{{- end -}}
+
+
+{{ define "partials/apis/inline-api-cards" -}}
+
+    {{ $apiPages := . -}}
+
+    {{ $apiNames := slice -}}
+    {{ $apiVersionPagesByApiNames := newScratch -}}
+    {{ range $apiPages -}}
+        {{ $apiDefinition := index .Params "api-definition" -}}
+        {{ $apiName := $apiDefinition.Info.Name -}}
+
+        {{ $apiNames = ( $apiNames | append $apiName) | uniq -}}
+        {{ if eq ($apiVersionPagesByApiNames.Get $apiName) nil -}}
+            {{ $apiVersionPagesByApiNames.Set $apiName (slice . ) -}}
+        {{ else -}}
+            {{ $apiVersionPagesByApiNames.Set $apiName ( $apiVersionPagesByApiNames.Get $apiName | append  . ) -}}
+        {{ end -}}
+    {{ end -}}
+
+    {{ range sort $apiNames -}}
+        {{ $apiName := . -}}
+        {{ $apiVersions := partial "apis/functions/sortApiVersionPagesByVersion" ($apiVersionPagesByApiNames.Get .) -}}
+        {{- $onlyOneVersion := eq (len $apiVersions) 1 -}}
+        {{- $lastVersionPage :=  index (last 1 $apiVersions) 0 -}}
+        {{- $lastVersionPageApiDefinition := index $lastVersionPage.Params "api-definition" -}}        
+
+      <article class="api">
+        <h3 class="api__title"><a href="{{ $lastVersionPage.Permalink }}" role="menuitem" class="api__link" aria-current="page" tabindex="-1">{{ $apiName -}}</a></h3>
+        <div class="api__list dropdown">
+        {{- if $onlyOneVersion -}}
+             <a href="{{ $lastVersionPage.Permalink -}}" class="btn btn__version">{{ $lastVersionPageApiDefinition.info.version -}}</a>
+        {{- else -}}
+          <button type="button" class="btn btn__version js-dropdown" aria-controls="versions{{ $lastVersionPageApiDefinition.path }}" aria-haspopup="true" aria-expanded="false">{{ $lastVersionPageApiDefinition.info.version -}}
+            <svg viewBox="0 0 16 16" aria-hidden="true" class="dropdown__icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg>
+          </button>
+          <div id="versions{{ $lastVersionPageApiDefinition.path -}}" role="menu" class="dropdown__content" hidden>
+            {{- range $apiVersions -}}
+                {{- $isLastVersion :=  eq . $lastVersionPage -}}
+                {{- $apiVersionPageApiDefinition := index .Params "api-definition" -}}
+             <a href="{{ .Permalink }}" role="menuitem" class="dropdown__item {{ if $isLastVersion }} dropdown__item--selected {{ end }}"{{ if $isLastVersion }} aria-current="page"{{ end }} tabindex="-1">{{ $apiVersionPageApiDefinition.info.version -}}</a>
+            {{- end -}}
+          </div>
+        {{- end -}}
+        </div>
+        <div class="api__description">{{ $lastVersionPageApiDefinition.info.description | markdownify -}}</div>
+      </article>
+    {{ end -}}
+{{ end -}}

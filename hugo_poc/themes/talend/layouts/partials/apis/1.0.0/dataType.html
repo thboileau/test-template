@@ -1,0 +1,20 @@
+{{ $itemsByJsonPath := .itemsByJsonPath -}}
+{{ $idsByJsonPath := .idsByJsonPath -}}
+{{ $apiDefinition := .apiDefinition -}}
+{{ $dataType := .dataType }}
+{{ $id := .id }}
+
+<section class="datatype" aria-labelledby="{{ $dataType.name }}">
+	<div class="datatype__content">
+		<div class="datatype__header">
+			<h3 id="{{ $id }}">{{ $dataType.name }}</h3>
+		</div>
+		<div class="definition__dataType definition">
+			<div id="tooltip_{{ $id }}" class="js-tooltip-content" >
+        {{ with $dataType.description }}<div class="dataType__description wysiwyg">{{ . | markdownify }}</div>{{ end }}
+		{{ partial "apis/1.0.0/dataTypeContent" (dict "itemsByJsonPath" $itemsByJsonPath "idsByJsonPath" $idsByJsonPath "apiDefinition" $apiDefinition "dataType" $dataType ) -}}
+		{{ with $dataType.examples }}<div class="metadata"><span class="metadata__label">{{ i18n "api-example" (len .) -}}</span><ul class="example">{{ range . }}<li class="badge example__value">{{ . }}</li>{{ end }}</ul></div>{{ end -}}
+		</div>
+      </div>
+      </div>
+    </section>

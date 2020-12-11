@@ -1,0 +1,18 @@
+{{ $oas3 := .GetMatch "oas3.json" }}
+{{ $swagger2 := .GetMatch "swagger2.json" }}
+{{ if or (ne $oas3 nil) (ne $swagger2 nil) }}
+<div class="dropdown">
+  <button class="js-dropdown btn btn--primary" aria-controls="download" aria-haspopup="true" aria-expanded="false" type="button">
+    {{ i18n "download-title" -}}
+    <svg viewBox="0 0 16 16" aria-hidden="true" class="dropdown__icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg>
+  </button>
+  <div id="download" role="menu" class="dropdown__content" hidden>
+  {{ if ne $oas3 nil }}
+    <a href="{{ $oas3.Permalink }}" role="menuitem" class="dropdown__item" tabindex="-1" download>{{ i18n "download-oas3" -}}</a>
+  {{ end }}
+  {{ if ne $swagger2 nil }}
+    <a href="{{ $swagger2.Permalink }}" role="menuitem" class="dropdown__item" tabindex="-1" download>{{ i18n "download-swagger2" -}}</a>
+  {{ end }}
+  </div>
+</div>
+{{ end }}

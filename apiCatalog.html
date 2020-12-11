@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>API Catalog</title>
+  <meta name="description" content="API Catalog">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="API Catalog">
+  <meta property="og:type" content="">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="img/talend.svg">
+  <link rel="apple-touch-icon" href="img/talend.svg">
+  <link rel="alternate icon" href="/favicon.ico">
+
+  <link rel="preload" as="font" href="fonts/sourceSansPro/source-sans-pro-v9-latin-regular.woff2">
+  <link rel="preload" as="font" href="fonts/sourceSansPro/source-sans-pro-v9-latin-600.woff2">
+  <link rel="preload" as="font" href="fonts/sourceSansPro/source-sans-pro-v9-latin-700.woff2">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/sourcesanspro.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/helper.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body class="container api-catalog">
+  <a class="skip-link sr-only focusable" href="#content">skip to main content</a>
+  <header class="header">
+    <ul class="header__menu">
+      <li class="header__item "><a class="header__link header__brand" href="/"><span class="sr-only">Home</span></a></li>
+      <li class="header__item"><a class="header__link" href="/gettingStarted.html">Getting started</a></li>
+      <li class="header__item"><a aria-current="page" class="header__link" href="/apiCatalog.html">APIs</a></li>
+    </ul>
+  </header>
+  <main id="content">
+    <h1 class="sr-only">API Catalog</h1>
+    <nav class="breadcrumb" aria-label="breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/" class="breadcrumb__element">Home</a><span class="breadcrumb__separator" aria-hidden="true"> / </span></li>
+        <li class="breadcrumb__item"><a aria-current="page" href="/apiCatalog.html" class="breadcrumb__element">APIs</a><span class="breadcrumb__separator" aria-hidden="true"> / </span></li>
+      </ol>
+    </nav>
+    <section class="domain">
+      <h2 class="domain__title">Customers</h2>
+      <article class="api">
+        <h3 class="api__title"><a class="api__link" href="/apiReference.html">Customers satisfaction API</a></h3>
+        <div class="api__list dropdown">
+          <button type="button" class="btn btn__version js-dropdown" aria-controls="customersVersions" aria-haspopup="true" aria-expanded="false">v2.1-beta
+            <svg viewBox="0 0 16 16" aria-hidden="true" class="dropdown__icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg>
+          </button>
+          <div id="customersVersions" role="menu" class="dropdown__content" hidden>
+            <a href="/apiReference.html" role="menuitem" class="dropdown__item" tabindex="-1">v2.1-beta</a>
+            <a href="/apiReference.html" role="menuitem" class="dropdown__item dropdown__item--selected" aria-current="page" tabindex="-1">v2.1-beta</a>
+            <a href="/apiReference.html" role="menuitem" class="dropdown__item" tabindex="-1">V2.1</a>
+          </div>
+        </div>
+        <div class="api__description">
+          Etiam accumsan nulla vitae sem posuere pulvinar. Donec sodales euismod nibh, sit amet sodales arcu condimentum nec. Proin ac justo orci.
+        </div>
+      </article>
+      <article class="api">
+        <h3 class="api__title"><a class="api__link" href="/apiReference.html">GDPR consent</a></h3>
+        <div class="api__list dropdown">
+          <a href="/apiReference.html" class="btn btn__version">v1.0</a>
+        </div>
+        <div class="api__description">
+          Proin facilisis dignissim enim, ut finibus purus laoreet eu
+        </div>
+      </article>
+      <article class="api">
+        <h3 class="api__title"><a class="api__link" href="/apiReference.html">Customer data</a></h3>
+        <div class="api__list dropdown">
+          <button type="button" class="btn btn__version js-dropdown" aria-controls="dataVersions" aria-haspopup="true" aria-expanded="false">v1.0
+            <svg viewBox="0 0 16 16" aria-hidden="true" class="dropdown__icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg>
+          </button>
+          <div id="dataVersions" role="menu" class="dropdown__content" hidden>
+            <a href="/apiReference.html" role="menuitem" class="dropdown__item" tabindex="-1">v2.1-beta</a>
+            <a href="/apiReference.html" role="menuitem" class="dropdown__item dropdown__item--selected" aria-current="page" tabindex="-1">V2.0</a>
+            <a href="/apiReference.html" role="menuitem" class="dropdown__item" tabindex="-1">V2.1</a>
+          </div>
+        </div>
+        <div class="api__description">
+          Vivamus tempus nec nibh rutru ullamcorper
+        </div>
+      </article>
+      <article class="api" id="v21beta">
+        <h3 class="api__title"><a class="api__link" href="/apiReference.html">Customer service</a></h3>
+        <div class="api__list dropdown">
+          <button type="button" class="btn btn__version js-dropdown" aria-controls="serviceVersions" aria-haspopup="true" aria-expanded="false"><span class="js-dropdown-text response__mimetype">v2.1-beta</span>
+            <svg viewBox="0 0 16 16" aria-hidden="true" class="dropdown__icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg>
+          </button>
+          <div id="serviceVersions" role="menu" class="dropdown__content" hidden>
+            <a href="#v21beta" role="menuitem" data-api class="dropdown__item dropdown__item--selected" aria-current="true" tabindex="-1">v2.1-beta</a>
+            <a href="#v20" role="menuitem" data-api class="dropdown__item" tabindex="-1">V2.0</a>
+            <a href="#v21" role="menuitem" data-api class="dropdown__item" tabindex="-1">V2.1</a>
+          </div>
+        </div>
+        <div class="api__description">
+          Aliquam eget ullamcorper tortor. Morbi nisi nibh, tristique sagittis magna a, laoreet commodo odio. Proin placerat libero eget leo sollicitudin ornare. Vivamus tempus nec nibh rutrum ullamcorper. Praesent pulvinar lacu…
+        </div>
+      </article>
+      <article class="api" id="v20" hidden>
+        <h3 class="api__title"><a class="api__link" href="/apiReference.html">Customer service</a></h3>
+        <div class="api__list dropdown">
+          <button type="button" class="btn btn__version js-dropdown" aria-controls="serviceVersions2" aria-haspopup="true" aria-expanded="false"><span class="js-dropdown-text response__mimetype">v2.0</span>
+            <svg viewBox="0 0 16 16" aria-hidden="true" class="dropdown__icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg>
+          </button>
+          <div id="serviceVersions2" role="menu" class="dropdown__content" hidden>
+            <a href="#v21beta" role="menuitem" data-api class="dropdown__item" tabindex="-1">v2.1-beta</a>
+            <a href="#v20" role="menuitem" data-api class="dropdown__item dropdown__item--selected" aria-current="true" tabindex="-1">V2.0</a>
+            <a href="#v21" role="menuitem" data-api class="dropdown__item" tabindex="-1">V2.1</a>
+          </div>
+        </div>
+        <div class="api__description">
+          Aliquam eget ullamcorper tortor. Morbi nisi nibh, tristique sagittis magna a, laoreet commodo odio. Proin placerat libero eget leo sollicitudin ornare. Vivamus tempus nec nibh rutrum ullamcorper. Praesent pulvinar lacu…
+        </div>
+      </article>
+      <article class="api" id="v21" hidden>
+        <h3 class="api__title"><a class="api__link" href="/apiReference.html">Customer service</a></h3>
+        <div class="api__list dropdown">
+          <button type="button" class="btn btn__version js-dropdown" aria-controls="serviceVersions3" aria-haspopup="true" aria-expanded="false"><span class="js-dropdown-text response__mimetype">v2.1</span>
+            <svg viewBox="0 0 16 16" aria-hidden="true" class="dropdown__icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg>
+          </button>
+          <div id="serviceVersions3" role="menu" class="dropdown__content" hidden>
+            <a href="#v21beta" data-api role="menuitem" class="dropdown__item" tabindex="-1">v2.1-beta</a>
+            <a href="#v20" data-api role="menuitem" class="dropdown__item" tabindex="-1">V2.0</a>
+            <a href="#v21" data-api role="menuitem" class="dropdown__item dropdown__item--selected" aria-current="true" tabindex="-1">V2.1</a>
+          </div>
+        </div>
+        <div class="api__description">
+          Aliquam eget ullamcorper tortor. Morbi nisi nibh, tristique sagittis magna a, laoreet commodo odio. Proin placerat libero eget leo sollicitudin ornare. Vivamus tempus nec nibh rutrum ullamcorper. Praesent pulvinar lacu…
+        </div>
+      </article>
+    </section>
+    <section class="api-section">
+      <h2 class="api-section__title">Orders</h2>
+      <article class="api">
+        <h3 class="api__title"><a class="api__link" href="/apiReference.html">Vivamus tempus nec nibh rutrum ullamcorper</a></h3>
+        <div class="api__list dropdown">
+          <button type="button" class="btn btn__version js-dropdown" aria-controls="vivamusVersions" aria-haspopup="true" aria-expanded="false">v1.0
+            <svg viewBox="0 0 16 16" aria-hidden="true" class="dropdown__icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg>
+          </button>
+          <div id="vivamusVersions" role="menu" class="dropdown__content" hidden>
+            <a href="/apiReference.html" role="menuitem" class="dropdown__item" tabindex="-1">v2.1-beta</a>
+            <a href="/apiReference.html" role="menuitem" class="dropdown__item dropdown__item--selected" aria-current="page" tabindex="-1">V2.0</a>
+            <a href="/apiReference.html" role="menuitem" class="dropdown__item" tabindex="-1">V2.1</a>
+          </div>
+        </div>
+        <div class="api__description">
+          Etiam accumsan nulla vitae sem posuere pulvinar. Donec sodales euismod nibh, sit amet sodales arcu condimentum nec. Proin ac justo orci.
+        </div>
+      </article>
+    </section>
+    <section class="domain">
+      <h2 class="domain__title">Products</h2>
+      <article class="api">
+        <h3 class="api__title"><a class="api__link" href="/apiReference.html">Contacts API</a></h3>
+        <div class="api__list dropdown">
+          <button type="button" class="btn btn__version js-dropdown" aria-controls="contactsVersions" aria-haspopup="true" aria-expanded="false">v1.0
+            <svg viewBox="0 0 16 16" aria-hidden="true" class="dropdown__icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg>
+          </button>
+          <div id="contactsVersions" role="menu" class="dropdown__content" hidden>
+            <a href="/apiReference.html" role="menuitem" class="dropdown__item" tabindex="-1">v2.1-beta</a>
+            <a href="/apiReference.html" role="menuitem" class="dropdown__item dropdown__item--selected" aria-current="page" tabindex="-1">V2.0</a>
+            <a href="/apiReference.html" role="menuitem" class="dropdown__item" tabindex="-1">V2.1</a>
+          </div>
+        </div>
+        <div class="api__description">
+          Etiam accumsan nulla vitae sem posuere pulvinar. Donec sodales euismod nibh, sit amet sodales arcu condimentum nec. Proin ac justo orci.
+        </div>
+      </article>
+      <article class="api">
+        <h3 class="api__title"><a class="api__link" href="/apiReference.html">Product catalog history</a>  </h3>
+        <div class="api__list dropdown">
+          <button type="button" class="btn btn__version js-dropdown" aria-controls="catalogVersions" aria-haspopup="true" aria-expanded="false">v1.0
+            <svg viewBox="0 0 16 16" aria-hidden="true" class="dropdown__icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg>
+          </button>
+          <div id="catalogVersions" role="menu" class="dropdown__content" hidden>
+            <a href="/apiReference.html" role="menuitem" class="dropdown__item" tabindex="-1">v2.1-beta</a>
+            <a href="/apiReference.html" role="menuitem" class="dropdown__item dropdown__item--selected" aria-current="page" tabindex="-1">V2.0</a>
+            <a href="/apiReference.html" role="menuitem" class="dropdown__item" tabindex="-1">V2.1</a>
+          </div>
+        </div>
+        <div class="api__description">
+          Quisque odio mauris, fermentum et placerat lacinia, dapibus sit amet lacus.
+        </div>
+      </article>
+    </section>
+  </main>
+  <footer class="footer">
+    <a href="/" class="footer__term-of-use">Terms of use</a>
+    <span class="footer__licence">© U.S. Cellular 2020. All rights reserved</span>
+  </footer>
+  <script src="js/main.js"></script>
+</body>
+</html>

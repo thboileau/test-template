@@ -1,0 +1,76 @@
+{{ $itemsByJsonPath := .itemsByJsonPath -}}
+{{ $idsByJsonPath := .idsByJsonPath -}}
+{{ $apiDefinition := .apiDefinition }}
+{{ $context := .context }}
+{{ $responseStatus := .responseStatus }}
+{{ $defaultMediaTypes := $apiDefinition.contract.mediaTypes }}
+{{ $jsonMediaType := slice "application/json" }}
+
+{{ with .bodies }}
+    {{ if gt (len .) 0 }}
+        {{ $scratch := newScratch }}
+        {{ $scratch.Set "bodies" slice }} {{/* transform .bodies which is a map into a list */}}
+        {{ range . }}
+            {{ $scratch.Add "bodies" . }}
+        {{ end }}
+        {{ $bodies := $scratch.Get "bodies" }}
+
+        {{ $onlyOneBody := eq (len $bodies) 1 }}
+        {{ $firstBody := index $bodies 0 }}
+
+<div class="{{$context}}__content">
+    <h5 class="{{$context}}__body">{{ i18n "api-body" (len $bodies) -}}</h5>
+    <div class="dropdown">
+        {{ $randomId := delimit (shuffle (split (md5 "aria-controls for body") "" )) "" }}
+        {{if $onlyOneBody }}
+            {{ with (default $jsonMediaType (default $defaultMediaTypes $firstBody.mediaTypes)) }}{{ range .}}<span class="{{$context}}__mimetype">{{ . }}</span>{{ end }}{{ end }}
+        {{ else }}
+        <button type="button" class="btn btn__version js-dropdown" aria-controls="{{ $randomId }}" aria-haspopup="true" aria-expanded="false">
+            {{ with (default $defaultMediaTypes $firstBody.mediaTypes) }}{{ range .}}<span class="js-dropdown-text {{$context}}__mimetype">{{.}}</span>{{end}}{{end}}
+            <svg viewBox="0 0 16 16" aria-hidden="true" class="dropdown__icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg>
+        </button>
+        <div role="menu" class="dropdown__content" id="{{ $randomId }}" hidden>
+            {{ range $bodies }}
+                {{ $isFirstBody := eq . $firstBody }}
+                {{ $mediaTypesAsString := delimit (default $jsonMediaType (default $defaultMediaTypes .mediaTypes))  ", " }}
+                <a href="#body_{{ $randomId }}{{ $mediaTypesAsString | anchorize }}" data-example role="menuitem" class="dropdown__item" tabindex="-1" {{if $isFirstBody}}hidden{{end}}>{{ $mediaTypesAsString }}</a>
+            {{ end }}
+        </div>
+        {{ end }}
+    </div>
+</div>
+
+        {{ range $bodies }}
+            {{ $isFirstBody := eq . $firstBody }}
+            {{ $mediaTypesAsString := delimit (default $jsonMediaType (default $defaultMediaTypes .mediaTypes))  ", " }}
+<div id="body_{{ $randomId }}{{ $mediaTypesAsString | anchorize }}" class="body__content" {{ if not $isFirstBody}}hidden{{end}}>
+    <span class="body__type">{{ partial "apis/1.0.0/dataTypeContent" (dict "itemsByJsonPath" $itemsByJsonPath "idsByJsonPath" $idsByJsonPath "apiDefinition" $apiDefinition "dataType" .) }}</span>
+
+{{/* TODO should be integrated inside datatype. 
+    <button type="button" class="btn--naked tooltip js-tooltip-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="contactDatatypeTooltip">
+        <span class="sr-only">TODO Contacts details</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"  viewBox="0 0 16 16" aria-hidden="true"><g><path d="M8,0 C12.418278,0 16,3.581722 16,8 C16,12.418278 12.418278,16 8,16 C3.581722,16 0,12.418278 0,8 C0,3.581722 3.581722,0 8,0 Z M7.88888889,6.11262338 C7.39796911,6.11262338 7,6.51059249 7,7.00151227 L7,11.4459567 C7,11.9368765 7.39796911,12.3348456 7.88888889,12.3348456 C8.37980867,12.3348456 8.77777778,11.9368765 8.77777778,11.4459567 L8.77777778,7.00151227 C8.77777778,6.51059249 8.37980867,6.11262338 7.88888889,6.11262338 Z M7.88888889,3.44293218 C7.39796911,3.44293218 7,3.84090129 7,4.33182107 C7,4.82274084 7.39796911,5.22070996 7.88888889,5.22070996 C8.37980867,5.22070996 8.77777778,4.82274084 8.77777778,4.33182107 C8.77777778,3.84090129 8.37980867,3.44293218 7.88888889,3.44293218 Z"></path></g></svg>
+    </button>
+*/}}
+            {{ with .examples }}
+                {{ if gt (len .) 0 }}
+                    {{ $firstExample := index  . 0 }}
+    <div class="definition-example">
+        <div class="definition-example__title">
+            {{ with $responseStatus }}<span>{{ i18n "api-status" . }}</span>{{end}}
+            {{ with (default $jsonMediaType (default $defaultMediaTypes $firstBody.mediaTypes)) }}{{ range .}}<span class="definition-example__mimetype">{{.}}</span>{{end}}{{end}}
+        </div>
+        <div role="region" tabindex="0" class="code-container" aria-labelledby="TODO-contactApplicationJson">
+            <pre>
+                <code>
+{{$firstExample}}
+                </code>
+            </pre>
+        </div>
+    </div>
+                {{ end }}
+            {{ end }}
+</div>
+        {{ end }}
+    {{ end }}
+{{ end }}

@@ -1,0 +1,39 @@
+# Control the way the list of APIs are displayed.
+# By default, all APIs are listed and sorted by their name.
+# This file helps you to configure how to display the APIs by domain.
+---
+- Component:
+  - component
+- Types:
+  - typeReference
+  - typeObject
+  - typeArraySimple
+  - typeArrayObject
+  - typeArrayReference
+  - typeArrayArraySimple
+  - anyof
+  - oneof
+  - allof
+- Information block:
+  - info-contact
+  - info-license
+  - info-termsOfService
+- Misc:
+  - section
+  - text
+  - several-versions
+  - securitySchemes
+  - downloads
+  - endpoint
+- Operation:
+  - operationQueryParams
+  - operationHeaders
+  - operationBody
+- Response:
+  - responseStatus
+  - responseHeaders
+  - responseBody
+- Heavy load:
+  - borealis
+- Special characters:
+  - 手手

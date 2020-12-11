@@ -1,0 +1,9 @@
+    <ul class="header__menu">
+        <li class="header__item "><a class="header__link header__brand" href="{{.Site.Home.Permalink}}" aria-current="page"><span class="sr-only">{{ i18n "apis-breadcrumb-home" -}}</span></a></li>
+{{ $currentPage := . }}
+{{ range .Site.Menus.main.ByWeight }}
+        <li class="header__item">
+            <a href="{{ default .Page.Permalink .URL }}" class="header__link{{ if eq $currentPage.Type .Page.Type }} active{{ end }}">{{ default .Page.Title .Name }}</a>
+        </li>
+{{ end }}
+    </ul>

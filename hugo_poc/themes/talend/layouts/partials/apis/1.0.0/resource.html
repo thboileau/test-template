@@ -1,0 +1,11 @@
+{{ $itemsByJsonPath := .itemsByJsonPath -}}
+{{ $idsByJsonPath := .idsByJsonPath -}}
+{{ $apiDefinition := .apiDefinition }}
+{{ $resource := .resource }}
+{{ $rwadefResource := .rwadefResource }}
+
+
+{{ range $key,$operation := .resource.operations }}
+	{{ $id := index $idsByJsonPath (print "#/contract/operations/" $key ) }}
+	{{ partial "apis/1.0.0/operation" (dict "itemsByJsonPath" $itemsByJsonPath "idsByJsonPath" $idsByJsonPath "apiDefinition" $apiDefinition "operation" $operation "path" $resource.path "pathVariables" $resource.pathVariables "resourceSecuredBy" $resource.securedBy "id" $id "$rwadefResource" $rwadefResource) }}
+{{ end }}

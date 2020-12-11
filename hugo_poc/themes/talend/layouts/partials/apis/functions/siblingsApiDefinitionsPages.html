@@ -1,0 +1,12 @@
+{{ $apiVersionPages := .apiVersionPages -}}
+{{ $currentApiName := .currentApiName -}}
+
+{{ $siblingsApiDefinitionsPages := slice -}} 
+{{ range $apiVersionPages -}} 
+	{{ $apiDefinition := index .Params "api-definition" -}} 
+
+	{{ if eq $apiDefinition.Info.Name $currentApiName -}}
+	    {{ $siblingsApiDefinitionsPages = $siblingsApiDefinitionsPages | append  . -}} 
+	{{ end -}}
+{{ end -}}
+{{ return partial "apis/functions/sortApiVersionPagesByVersion" $siblingsApiDefinitionsPages -}} 

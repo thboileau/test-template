@@ -1,0 +1,31 @@
+:root {
+  --primary-color: 6, 117, 193;
+  --secondary-color: #FAFAFA;
+
+  --header-background: linear-gradient(133deg, rgb(25, 66, 108), rgb(44, 31, 86)) repeat scroll 0 0;
+  --header-color: #fff;
+  --header-brand-logo: url("../img/talend.svg");
+
+  --get-request-color: #4D834C;
+  --post-request-color: #F3B621;
+  --put-request-color: #3477CD;
+  --delete-request-color: #D14454;
+
+  --color--neutral: #6d6d6d;
+  --color--neutral-bg: #F0F0F0;
+  --color--warn-bg: #F8DAC1;
+  --color--warn: #93521d;
+  --color--error-bg: rgba(233,96,101,.2);
+  --color--error: #b1181e;
+
+  --color--redirect-bg: rgba(6,117,193,.2);
+  --color--redirect: #022a45;
+
+  --font-family-serif: serif;
+  --font-family-sans-serif: 'Source Sans Pro';
+  --font-family-monospace: '';
+  --font-size-xs: .75rem;
+  --font-size-s: .875rem;
+  --font-size-sm: 1rem;
+  --font-size-md: 1.125rem;
+}

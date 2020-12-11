@@ -1,0 +1,45 @@
+{{ $itemsByJsonPath := .itemsByJsonPath -}}
+{{ $idsByJsonPath := .idsByJsonPath -}}
+{{ $apiDefinition := .apiDefinition }}
+{{ $context := .context }}
+{{ $label := .label }}
+{{ $type := .type }}
+
+{{ with .params }}
+ <table>
+   <caption class="{{ $context }}__{{$type}}">{{$label}}</caption>
+   <thead class="sr-only">
+     <tr>
+       <th scope="col">{{ i18n "api-parameter-name" -}}</th>
+       <th scope="col">{{ i18n "api-parameter-description" -}}</th>
+       <th scope="col">{{ i18n "api-parameter-type" -}}</th>
+       <th scope="col">{{ i18n "api-parameter-examples" -}}</th>
+     </tr>
+   </thead>
+   <tbody>
+   	{{ range . }}
+     <tr class="{{ $context }}__parameter">
+       <th scope="row">{{ .name }}</th>
+       <td>{{ .description | markdownify }}</td>
+       <td class="{{ $context }}__parameter-type">{{ partial "apis/1.0.0/dataTypeContent" (dict "itemsByJsonPath" $itemsByJsonPath "idsByJsonPath" $idsByJsonPath "apiDefinition" $apiDefinition "dataType" . ) }} {{ if .required }}<span class="badge badge--warn">Required</span>{{else}}<span class="badge">Optional</span>{{ end }}</td>
+       <td class="{{ $context }}__parameter-example">
+       	{{ with .examples }}
+       	<div class="metadata">
+       		<span class="metadata__label">{{ i18n "api-parameter-examples" (len .) -}}</span>
+       		{{ if eq (len .) 1 }}
+       		<span class="badge">{{ range . }}{{ .value}}{{end}}</span>
+       		{{ else }}
+           <ul class="example">
+          		{{ range . }}
+             <li class="example__value badge">{{.value}}</li>
+				      {{ end }}
+       		{{ end }}
+           </ul>
+       	</div>
+       	{{ end }}
+       </td>
+     </tr>
+     {{ end }}
+   </tbody>
+ </table>
+{{ end }}

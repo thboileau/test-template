@@ -1,0 +1,223 @@
+/*! HTML5 Boilerplate v8.0.0 | MIT License | https://html5boilerplate.com/ */
+
+
+body {
+  background-color: var(--secondary-color);
+}
+
+/* avoid important as it's overriding .sr-only.focusable helper */
+.skip-link.skip-link.skip-link {
+  position: absolute;
+  color: #fff;
+}
+
+.header { grid-area: header; }
+.left-panel { grid-area: leftpanel; }
+main { grid-area: main; }
+.footer { grid-area: footer; }
+
+.header {
+  color: rgb(255, 255, 255);
+  background: var(--header-background);
+  height: 3.437rem;
+}
+
+.header__menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  align-items: center;
+  height: 100%;
+  padding: 0;
+}
+.header__item {
+  height: 100%;
+}
+
+.header__link {
+  display: inline-flex;
+  padding: 0 1rem;
+  height: 100%;
+  align-items: center;
+  color: var(--header-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.header__link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.header__menu:first-child {
+  margin-left: 1rem;
+}
+
+.header__brand {
+  background-image: var(--header-brand-logo);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+main {
+  padding: 0 1rem;
+}
+
+.breadcrumb__list {
+  list-style: none;
+  padding: 0;
+}
+
+.breadcrumb__item {
+  display: inline;
+}
+.breadcrumb__element {
+  color: #202020;
+}
+.breadcrumb__element[aria-current] {
+  font-weight: 600;
+}
+
+.footer {
+  height: 2.25rem;
+  display: flex;
+  margin: 0 10rem;
+  justify-content: space-between;
+  align-items: center;
+  color: #4A4A4A;
+}
+
+.footer__term-of-use {
+  color: #4A4A4A;
+}
+
+.left-panel {
+  margin: 0 1rem;
+}
+
+.api-catalog  {
+  display: grid;
+  grid-template-columns: 0.185fr 1.2fr;
+  grid-template-rows: 0.01fr 2.6fr 0.01fr ;
+  grid-template-areas:
+    "header header"
+    "leftpanel main"
+    "footer footer";
+  background-color: var(--secondary-color);
+}
+
+.header { grid-area: header; }
+.left-panel { grid-area: leftpanel; }
+main { grid-area: main; }
+.footer { grid-area: footer; }
+@media only screen and (max-width: 60em) {
+  .api-catalog {
+    grid-template-columns: .5fr 1fr;
+    grid-template-rows: fit-content(100%) fit-content(100%) fit-content(100%);
+    grid-template-areas:
+      "header header"
+      "leftpanel main"
+      "footer footer";
+  }
+}
+
+
+@media only screen and (max-width: 35em) {
+  .api-catalog {
+    grid-template-columns: 100%;
+    grid-template-rows: fit-content(100%) fit-content(100%) fit-content(100%) fit-content(100%);
+    grid-template-areas:
+      "header"
+      "leftpanel"
+      "main"
+      "footer";
+  }
+}
+
+.domain {
+  margin-top: 2rem;
+}
+
+.domain__title {
+  color: var(--color--neutral);
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  margin: 0;
+}
+
+.api__title {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  margin: 1rem 0 0 0;
+}
+
+.api {
+  display: inline-flex;
+  flex-direction: column;
+  width: 21rem;
+  height: 13.5rem;
+  padding: 0 1rem;
+  margin-right: 2rem;
+  margin-top: 1rem;
+  border: 1px solid var(--color--neutral-bg);
+  border-radius: .5rem;
+  background-color: #fff;
+}
+
+.api div {
+  margin-top: 1rem;
+  display: inline-block;
+}
+
+.api__description {
+  display: flex;
+}
+
+.api__link:hover::after {
+  content: ' →';
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown__content {
+  background-color: #fff;
+  box-shadow: 0 1px 3px 0px  var(--color--neutral-bg); 
+  width: 13rem;
+  position: absolute;
+  z-index: 1;
+}
+
+.dropdown__item {
+  display: block;
+  padding: .5714rem 2rem;
+}
+
+.dropdown__item--selected {
+  color: #0165A4;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' fill='%230165A4' viewBox='0 0 16 16'%3E%3Cpath d='M6 14L0 8l1.9-1.9L6 10.2 14.1 2 16 3.9z'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: .5rem;
+}
+
+.btn {
+  background-color: transparent;
+  appearance: none;
+  border: 2px solid;
+  line-height: normal;
+  font-weight: 600;
+ }
+
+.api-catalog .btn__version {
+  border-color: #EAEAEA;
+  border-width: 1px;
+  border-radius: 12.5px;
+  padding: .1429rem .5714rem;
+  background-color: var(--secondary-color);
+}
+
+.api-catalog .btn__version span {
+  color: #758595;
+}

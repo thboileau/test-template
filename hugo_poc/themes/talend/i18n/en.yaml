@@ -1,0 +1,117 @@
+#
+# Simple translation syntax:
+#- id: "api-catalog"
+#  translation: "API Catalog"
+#
+# Translation with parameter:
+# it behaves like calling a partial
+# This template: {{ i18n "intro" . }} could leverage 
+#- id: intro
+#  translation:  "Voici l'histoire de {{ .Params.lead }}{{ with .Params.location }} qui se déroule à {{ . }}{{ end }}"
+#
+# Variant that leverages a value for plural
+# This template {{ i18n "mouse" .nbMice }} leverages
+#- id: story_mice
+#  translation:
+#    one: This story has only one Mouse
+#    other: "This story has {{ .Count }} Mice"
+
+
+- id: "content-not-expected"
+  translation: "This is not the expected content"
+- id: "api-catalog"
+  translation: "API Catalog"
+- id: "download-title"
+  translation: "Download"
+- id: "download-oas3"
+  translation: "OAS 3"
+- id: "download-swagger2"
+  translation: "Swagger 2"
+- id: "apis-breadcrumb"
+  translation: "Breadcrumb"
+- id: "apis-breadcrumb-home"
+  translation: "Home"
+- id: "apis-breadcrumb-api-catalog"
+  translation: "APIs"
+- id: "api-media-type"
+  translation:
+    one: "Media type"
+    other: "Media types"
+- id: "api-endpoint"
+  translation:
+    one: "Endpoint"
+    other: "Endpoints"
+- id: "api-global-security"
+  translation: "Global security"
+- id: "api-global-security-note"
+  translation:
+    one: "This security scheme applies to the entire API"
+    other: "These security schemes apply to the entire API"
+- id: "api-security-scheme"
+  translation:
+    one: "Security scheme"
+    other: "Security schemes"
+- id: "api-security-scheme-note"
+  translation:
+    one: "This scheme can be referenced across the API"
+    other: "These schemes can be referenced across the API"
+- id: "api-security"
+  translation: "Security"
+- id: "api-security-no-authentication"
+  translation: "No authentication"
+- id: "api-security-grant"
+  translation:
+    one: "Grant"
+    other: "Grants"
+- id: "api-security-authorization-uri"
+  translation: "Authorization URI"
+- id: "api-security-access-token-uri"
+  translation: "Access token URI"
+- id: "api-security-openid-connect-url"
+  translation: "OpenId connect URL"
+- id: "api-security-refresh-url"
+  translation: "refresh URL"
+- id: "api-security-bearer-format"
+  translation: "Format"
+- id: "api-security-scope"
+  translation:
+    one: "Scope"
+    other: "Scopes"
+- id: "api-left-panel-filter"
+  translation: "Filter"
+- id: "api-left-panel-api-content"
+  translation: "API content"
+- id: "api-body"
+  translation:
+    one: "Body"
+    other: "Bodies"
+- id: "api-status"
+  translation: "Status {{.}}"
+- id: "api-example"
+  translation:
+    one: "Example"
+    other: "Examples"
+- id: "api-item-details"
+  translation: "{{ . }} details"
+- id: "api-data-type-details"
+  translation: "Datatype details"
+- id: "api-contact"
+  translation: "Contact"
+- id: "api-license"
+  translation: "License"
+- id: "api-terms-of-service"
+  translation: "Terms of Service"
+- id: "api-request"
+  translation: "Request"
+- id: "api-response"
+  translation: "Response"
+- id: "api-parameter-name"
+  translation: "Name"
+- id: "api-parameter-description"
+  translation: "Description"
+- id: "api-parameter-type"
+  translation: "Type"
+- id: "api-parameter-examples"
+  translation:
+    one: "Example"
+    other: "Examples"

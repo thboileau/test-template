@@ -1,0 +1,29 @@
+{{ $apiDefinition := .apiDefinition }}
+
+{{ $hasContactInfo := or (isset $apiDefinition.info.contact "url") (isset $apiDefinition.info.contact "name") (isset $apiDefinition.info.contact "email") }}
+{{ $hasLicenseInfo := or (isset $apiDefinition.info.license "name") (isset $apiDefinition.info.license "url") }}
+{{ $hasTermsOfServiceInfo := (isset $apiDefinition.info "termsofservice") }}
+
+{{ if or $hasContactInfo $hasLicenseInfo $hasTermsOfServiceInfo }}
+<dl class="definition contact">
+  {{ if $hasContactInfo }}
+    {{ with $apiDefinition.info.contact }}
+    {{ $hasNameOrUrl := or (isset $apiDefinition.info.contact "url") (isset $apiDefinition.info.contact "name") }}
+    {{ $hasEmail := (isset $apiDefinition.info.contact "email") }}
+  <dt class="contact__term">{{ i18n "api-contact" -}}</dt>
+  <dd class="contact__definition"><span>{{ with .Url }}<a href="{{ . }}">{{ end }}{{default .Url .Name }}{{ if .Url }}</a>{{ end }}{{if and $hasNameOrUrl $hasEmail}}, {{ end}}{{ with .Email }}<a href="mailto:{{ . }}">{{ . }}</a>{{end}}</span></dd>
+    {{ end }}
+  {{ end }}
+
+  {{ if $hasLicenseInfo }}
+    {{ with $apiDefinition.info.license }}
+      <dt class="contact__term">{{ i18n "api-license" -}}</dt>
+      <dd class="contact__definition">{{ with .Url }}<a href="{{ . }}">{{ end }}{{default .Url .Name }}{{ if .Url }}</a>{{ end }}</a></dd>
+    {{ end }}
+  {{ end }}
+  {{ with $apiDefinition.info.termsOfService }}
+      <dt class="contact__term">{{ i18n "api-terms-of-service" -}}</dt>
+      <dd class="contact__definition">{{ . }}</dd>
+  {{ end }}
+</dl>
+{{ end }}

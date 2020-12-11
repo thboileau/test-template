@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+{{ partial "head" . -}}
+</head>
+<body class="api-catalog">
+<header class="header">
+{{ partial "header" . -}}
+</header>
+
+<main id="content">
+    <h1 class="sr-only">{{ i18n "api-catalog" }}</h1>
+
+    <nav class="breadcrumb" aria-label="{{ i18n "apis-breadcrumb" -}}">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/" class="breadcrumb__element">{{ i18n "apis-breadcrumb-home" -}}</a><span class="breadcrumb__separator" aria-hidden="true"> / </span></li>
+        <li class="breadcrumb__item"><a aria-current="page" href="{{ .Permalink -}}" class="breadcrumb__element">{{ i18n "apis-breadcrumb-api-catalog" -}}</a><span class="breadcrumb__separator" aria-hidden="true"> / </span></li>
+      </ol>
+    </nav>
+{{- partial "apis/1.0.0/api-catalog" . -}}
+</main>
+
+<footer class="footer">
+{{ partial "footer" . -}}
+</footer>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

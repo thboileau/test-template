@@ -1,0 +1,1307 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Contacts API References</title>
+  <meta name="description" content="Contacts API documentation from Talend API Portal">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="Contacts API References">
+  <meta property="og:type" content="">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="img/talend.svg">
+  <link rel="apple-touch-icon" href="img/talend.svg">
+  <link rel="alternate icon" href="/favicon.ico">
+
+  <link rel="preload" as="font" href="fonts/sourceSansPro/source-sans-pro-v9-latin-regular.woff2">
+  <link rel="preload" as="font" href="fonts/sourceSansPro/source-sans-pro-v9-latin-600.woff2">
+  <link rel="preload" as="font" href="fonts/sourceSansPro/source-sans-pro-v9-latin-700.woff2">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/sourcesanspro.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/helper.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body class="container api-reference">
+  <a class="skip-link sr-only focusable" href="#content">skip to main content</a>
+  <header class="header">
+    <ul class="header__menu">
+      <li class="header__item "><a class="header__link header__brand" href="/"><span class="sr-only">Home</span></a></li>
+      <li class="header__item"><a class="header__link" href="/gettingStarted.html">Getting started</a></li>
+      <li class="header__item"><a class="header__link" href="/apiCatalog.html">APIs</a></li>
+    </ul>
+  </header>
+  <aside class="left-panel">
+    <div class="left-panel__wrapper">
+      <div class="api__general">
+        <h1>Contacts API</h1>
+        <div class="dropdown api__version">
+          <button type="button" class="btn btn__version js-dropdown" aria-controls="versions" aria-haspopup="true" aria-expanded="false">v1.0
+            <svg viewBox="0 0 16 16" aria-hidden="true" class="dropdown__icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg>
+          </button>
+          <div id="versions" role="menu" class="dropdown__content" hidden>
+            <a href="/apiReference.html" role="menuitem" class="dropdown__item" tabindex="-1">v1.0-beta</a>
+            <a href="/apiReference.html" role="menuitem" class="dropdown__item dropdown__item--selected" aria-current="page" tabindex="-1">v1.0</a>
+            <a href="/apiReference.html" role="menuitem" class="dropdown__item" tabindex="-1">V2.1</a>
+          </div>
+        </div>
+      </div>
+      <div class="api__action">
+        <button type="button" class="try-in-tester btn btn--as-link btn--primary">Try in API Tester</button>
+        <div class="dropdown">
+          <button class="js-dropdown btn btn--primary" aria-controls="download" aria-haspopup="true" aria-expanded="false" type="button">
+            Download
+            <svg viewBox="0 0 16 16" aria-hidden="true" class="dropdown__icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg>
+          </button>
+          <div id="download" role="menu" class="dropdown__content" hidden>
+            <a href="/oas3" role="menuitem" class="dropdown__item" tabindex="-1" download>OAS 3</a>
+            <a href="/swagger2" role="menuitem" class="dropdown__item" tabindex="-1" download>Swagger 2</a>
+          </div>
+        </div>
+      </div>
+      <form class="search-form js-search-form">
+        <label class="search-form__label" for="filter">
+          <svg class="search-form__icon" aria-hidden="true" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+            <path d="M7.5 14C3.9 14 1 11.1 1 7.5S3.9 1 7.5 1 14 3.9 14 7.5 11.1 14 7.5 14zm0-11C5 3 3 5 3 7.5S5 12 7.5 12 12 10 12 7.5 10 3 7.5 3zm6 9c-.4.6-.9 1.1-1.5 1.5l2.5 2.5 1.5-1.5-2.5-2.5z"></path>
+          </svg> <span class="sr-only">Filter</span>
+        </label>
+        <input class="search-form__field js-filter" id="filter" type="search" placeholder="Filter" />
+      </form>
+      <hr />
+      <nav aria-label="API content">
+        <ul class="api-definition js-api-definition">
+          <li>
+            <details open>
+              <summary class="api-definition__section-title"><a href="#general">General</a></summary>
+              <ul class="api-definition__content">
+                <li class="api-definition__item"><a href="#authentication">Authentication</a></li>
+                <li class="api-definition__item"><a href="#errorHandling">Error handling</a></li>
+                <li class="api-definition__item api-definition__item--datatype"><a href="#error">Error</a></li>
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details open>
+              <summary class="api-definition__section-title"><a href="#contactsSection">Contacts</a></summary>
+              <ul class="api-definition__content">
+                <li class="api-definition__item api-definition__item--request-get api-definition__item--selected"><a href="#getlistcontacts">Get the list of Contacts</a></li>
+                <li class="api-definition__item api-definition__item--request-post"><a href="#postContacts">POST /contacts/</a></li>
+                <li class="api-definition__item api-definition__item--request-get"><a href="#loadContacts">Load a Contact</a></li>
+                <li class="api-definition__item api-definition__item--request-delete"><a href="#deleteContacts">Delete a Contact</a></li>
+                <li class="api-definition__item api-definition__item--request-put"><a href="#updateContacts">Update a Contact</a></li>
+                <li class="api-definition__item api-definition__item--datatype"><a href="#contacts">Contact</a></li>
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details open>
+              <summary class="api-definition__section-title"><a href="#contacts">Companies</a></summary>
+              <ul class="api-definition__content">
+                <li class="api-definition__item api-definition__item--request-get"><a href="#getlistcontacts">Load the list of Companies</a></li>
+                <li class="api-definition__item api-definition__item--request-post"><a href="#getlistcontacts">Create a new Company</a></li>
+                <li class="api-definition__item api-definition__item--request-put"><a href="#getlistcontacts">Update a Company</a></li>
+                <li class="api-definition__item api-definition__item--request-delete"><a href="#getlistcontacts">Delete a Company</a></li>
+                <li class="api-definition__item api-definition__item--datatype"><a href="#getlistcontacts">Company</a></li>
+              </ul>
+            </details>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </aside>
+  <main id="content">
+    <nav class="breadcrumb" aria-label="breadcrumb">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/" class="breadcrumb__element">Home</a><span class="breadcrumb__separator" aria-hidden="true"> / </span></li>
+        <li class="breadcrumb__item"><a href="/apiCatalog.html" class="breadcrumb__element">APIs</a><span class="breadcrumb__separator" aria-hidden="true"> / </span></li>
+        <li class="breadcrumb__item"><a aria-current="page" href="/apiReference.html" class="breadcrumb__element">Contacts API</a></li>
+      </ol>
+    </nav>
+    <h2 id="contactsAPI">Contacts API</h2>
+    <div class="api-description wysiwyg">An API for keeping track of your contacts and the companies they work for.</div>
+    <dl class="definition contact">
+      <dt class="contact__term">Contact</dt>
+      <dd class="contact__definition"><a href="https://contact.url">Contact name</a>, <a href="mailto:contact@contact.mail">contact@contact.mail</a></dd>
+      <dt class="contact__term">License</dt>
+      <dd class="contact__definition"><a href="https://license.url">License name</a></dd>
+      <dt class="contact__term">Term of service</dt>
+      <dd class="contact__definition">Term of service Term of service Term of service Term of service.</dd>
+    </dl>
+    <div class="definition">
+      <h3 id="mediaTypes">Media types</h3>
+      <ul class="media-types"><li class="media-types__value">application/json</li><li class="media-types__value">application/xml</li></ul>
+    </div>
+    <div class="definition">
+      <h3>Endpoints</h3>
+      <ul class="endpoints">
+        <li class="endpoint__value"><span class="endpoint__url">http://contactsAPI.swagger.io/v2</span> <div class="endpoint__description">Production</div></li>
+        <li class="endpoint__value"><span class="endpoint__url">http://dev.contactsAPI.swagger.io/v2</span> <div class="endpoint__description">Dev server</div></li>
+      </ul>
+    </div>
+    <div class="definition">
+      <h3>Global security</h3>
+      <p class="note">These security schemes apply to the entire API</p>
+      <ul class="global-security"><li class="global-security__type">No authentication</li><li class="global-security__type"><a href="#contacts_Auth">Contacts_Auth</a></li><li class="global-security__type"><a href="#api_key">API_Key</a></li></ul>
+    </div>
+    <section class="definition" aria-labelledby="securitySchemes">
+      <h3 id="securitySchemes">Security schemes</h3>
+      <p class="note">These schemes can be referenced across the API</p>
+      <details class="security_scheme">
+        <summary class="security-scheme__name" id="contacts_Auth"><span class="security-scheme__name--content">Contacts_Auth</span> <svg viewBox="0 0 16 16" aria-hidden="true" class="security-scheme__name--icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg></summary>
+        <table class="security-scheme__content">
+          <caption class="security-scheme__type">OAuth 2.0</caption>
+          <thead class="sr-only">
+          <tr>
+            <th scope="col">name</th>
+            <th scope="col">description</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="security-scheme__parameter">
+            <th scope="row">Grant</th>
+            <td><span class="badge">Implicit</span></td>
+          </tr>
+          <tr class="security-scheme__parameter">
+            <th scope="row">Auth URI</th>
+            <td><span class="badge">http://contactAPI.swagger.io/oauth/dialog</span></td>
+          </tr>
+          <tr class="security-scheme__parameter">
+            <th scope="row">Scopes</th>
+            <td>
+              <ul class="example">
+                <li class="example__value"><span class="badge">Write:id</span> <span>modify contacts in your account</span></li>
+                <li class="example__value"><span class="badge">read:id</span> <span>read your contacts</span></li>
+              </ul>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </details>
+      <details class="security_scheme">
+        <summary class="security-scheme__name" id="api_key"><span class="security-scheme__name--content">API_Key</span> <svg viewBox="0 0 16 16" aria-hidden="true" class="security-scheme__name--icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg></summary>
+      </details>
+    </section>
+    <section aria-labelledby="general">
+      <h2 id="general">General</h2>
+      <div id="authentication" class="definition">
+        <h3>Authentication</h3>
+        <div class="wysiwyg">
+          <h1>An API to test the button Try in Client header 1</h1>
+            <h2>header 2</h2>
+            <ul>
+              <li>unordered</li>
+              <li>list</li>
+            </ul>
+            <ol>
+              <li>ordered</li>
+              <li>list</li>
+            </ol>
+            <p><a href="http://foo.bar">link</a>
+              <img src="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/73e3a302-6ca0-4609-bf75-458448c378e7/fig2-html5-article-section.png" alt="image"></p>
+            <pre class="hljs"><code><span class="hljs-keyword">const</span> toto = {};
+</code></pre>
+            <p><strong>yolo</strong> <em>molo</em></p>
+            <table>
+              <thead>
+              <tr>
+                <th>Column 1</th>
+                <th>Column 2</th>
+                <th>Column 3</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>Text</td>
+                <td>Text</td>
+                <td>Text</td>
+              </tr>
+              </tbody>
+            </table>
+            <pre><code>indent</code></pre>
+          <p class="note">This API is secured using Basic Authentication.</p>
+          <p>All <strong>read operations are open</strong> and don’t require authentication. However, all <strong>write operations require authentication</strong>.</p>
+        </div>
+      </div>
+      <div id="errorHandling" class="definition">
+        <h3>Error handling</h3>
+        <div class="wysiwyg">
+          <p>This API is secured using Basic Authentication.</p>
+          <p>All <strong>read operations are open</strong> and don’t require authentication. However, all <strong>write operations require authentication</strong>.</p>
+          <h4>Simple errors</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Bad request</td>
+                <td>400</td>
+                <td>The request was unacceptable</td>
+              </tr>
+              <tr>
+                <td>Unauthorized</td>
+                <td>401</td>
+                <td>The request has not been applied because it lacks valid authentication credentials for the target resource.</td>
+              </tr>
+              <tr>
+                <td>Forbidden</td>
+                <td>403</td>
+                <td>The server understood the request, but is refusing to fulfill it</td>
+              </tr>
+              <tr>
+                <td>Not Found</td>
+                <td>404</td>
+                <td>The server has not found anything matching the request URI</td>
+              </tr>
+              <tr>
+                <td>Not acceptable</td>
+                <td>406</td>
+                <td>The server is unable to return a response in the format that was requested by the client</td>
+              </tr>
+              <tr>
+                <td>Unsupported Media Type</td>
+                <td>415</td>
+                <td>The server is refusing to service the request because the entity of the request is in a format not supported by the requested resource for the requested method</td>
+              </tr>
+              <tr>
+                <td>Too many requests</td>
+                <td>429</td>
+                <td>Too many requests hit the API too quickly</td>
+              </tr>
+              <tr>
+                <td>Server error</td>
+                <td>500</td>
+                <td>A technical error occured</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Detailed errors</h4>
+          <table>
+            <thead>
+            <tr>
+              <th>Name</th>
+              <th>Code</th>
+              <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>Unprocessable entity</td>
+              <td>422</td>
+              <td>The server understands the content type of the request entity, and the syntax of the request entity is correct, but was unable to process the contained instructions.</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div id="error" class="definition">
+        <h3>Error</h3>
+        <p class="note">This general error structure is used throughout this API.</p>
+      </div>
+    </section>
+    <hr class="separator"/>
+    <h2 id="contactsSection">Contacts</h2>
+    <section class="operation" aria-labelledby="getlistcontacts">
+      <div class="operation__content">
+        <div class="operation__header">
+          <h3 id="getlistcontacts">Get the list of contacts</h3>
+          <span class="operation--get operation--default">GET</span> <span class="operation__url">/contacts/</span>
+        </div>
+        <div class="operation__description wysiwyg">Loads a list of Contact</div>
+          <div class="definition__content definition">
+            <h4>Request</h4>
+            <table>
+              <caption class="request__parameters">Query parameters</caption>
+              <thead class="sr-only">
+                <tr>
+                  <th scope="col">name</th>
+                  <th scope="col">description</th>
+                  <th scope="col">type</th>
+                  <th scope="col">examples</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="request__parameter">
+                  <th scope="row">id</th>
+                  <td>Size of the page to retrieve.</td>
+                  <td>Integer <span class="badge badge--warn">Required</span></td>
+                  <td><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">10</span></div></td>
+                </tr>
+                <tr class="request__parameter">
+                  <th scope="row">$sort</th>
+                  <td>Order in which to retrieve the results. Multiple sort criteria can be passed</td>
+                  <td class="request__parameter-type">String <span class="badge">Optional</span></td>
+                  <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span>
+                      <ul class="example">
+                        <li class="example__value badge">birthday DESC</li>
+                        <li class="example__value badge">birthday ASC,rank DESC</li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="request__parameter">
+                  <th scope="row">firstName</th>
+                  <td>Allows to filter the collection of results by the value of field</td>
+                  <td class="request__parameter-type">String <span class="badge">Optional</span></td>
+                  <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">John</span></div></td>
+                </tr>
+                <tr class="request__parameter">
+                  <th scope="row">lastName</th>
+                  <td>Allows to filter the collection of results by the value of field</td>
+                  <td class="request__parameter-type">String <span class="badge">Optional</span></td>
+                  <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">John</span></div></td>
+                </tr>
+                <tr class="request__parameter">
+                  <th scope="row">active</th>
+                  <td>Allows to filter the collection of results by the value of field</td>
+                  <td class="request__parameter-type">String <span class="badge">Optional</span></td>
+                  <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span>
+                      <ul class="example">
+                        <li class="example__value badge">true</li>
+                        <li class="example__value badge">false</li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="request__parameter">
+                  <th scope="row">company</th>
+                  <td>Allows to filter the collection of results by the value of field</td>
+                  <td class="request__parameter-type">String <span class="badge">Optional</span></td>
+                  <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">0e8c9fb0-ad98-11e6-bf2e-47644ada7c0f</span></div></td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+      <div class="definition__content definition">
+        <h4>Response</h4>
+        <div class="response">
+          <details open class="response__detail">
+            <summary class="response__type"><span class="response__type--content"><span class="badge badge--2xx">200</span> Status 200</span> <svg viewBox="0 0 16 16" aria-hidden="true" class="response__type--icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg></summary>
+            <table>
+              <caption class="response__headers">Headers</caption>
+              <thead class="sr-only">
+              <tr>
+                <th scope="col">name</th>
+                <th scope="col">description</th>
+                <th scope="col">type</th>
+                <th scope="col">examples</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="response__parameter">
+                <th scope="row">X-Page-Count</th>
+                <td></td>
+                <td class="request__parameter-type">Integer <span class="badge badge--warn">Required</span></td>
+                <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span><span class="badge">1</span></div></td>
+              </tr>
+              <tr class="response__parameter">
+                <th scope="row">X-Page-Number</th>
+                <td></td>
+                <td class="request__parameter-type">Integer <span class="badge">Optional</span></td>
+                <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">1</span></div></td>
+              </tr>
+              <tr class="response__parameter">
+                <th scope="row">X-Page-Size</th>
+                <td></td>
+                <td class="request__parameter-type">Integer <span class="badge">Optional</span></td>
+                <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">25</span></div></td>
+              </tr>
+              <tr class="response__parameter">
+                <th scope="row">X-Page-Count</th>
+                <td></td>
+                <td class="request__parameter-type">Integer <span class="badge">Optional</span></td>
+                <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">2</span></div></td>
+              </tr>
+              <tr class="response__parameter">
+                <th scope="row" aria-describedby="complexTypeDetail">Complex param</th>
+                <td>A complex parameter with subtype</td>
+                <td class="request__parameter-type">Object <span class="badge">Optional</span></td>
+                <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">2</span></div></td>
+              </tr>
+              <tr class="response__parameter--subtype">
+                <td colspan="4">
+                  <table id="complexTypeDetail">
+                    <caption class="sr-only">Complex param description</caption>
+                    <thead class="sr-only">
+                    <tr>
+                      <th scope="col">name</th>
+                      <th scope="col">description</th>
+                      <th scope="col">type</th>
+                      <th scope="col">examples</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="response__parameter">
+                      <th scope="row">SubType A</th>
+                      <td></td>
+                      <td class="request__parameter-type">Integer <span class="badge badge--warn">Required</span></td>
+                      <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span><span class="badge">1</span></div></td>
+                    </tr>
+                    <tr class="response__parameter">
+                      <th scope="row">SubType B</th>
+                      <td></td>
+                      <td class="request__parameter-type">Integer <span class="badge">Optional</span></td>
+                      <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">1</span></div></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+              <div class="response__content">
+                <h5 class="response__body">Body</h5>
+                <div class="dropdown">
+                  <button type="button" class="btn btn__version js-dropdown" aria-controls="getContactBody" aria-haspopup="true" aria-expanded="false"><span class="js-dropdown-text response__mimetype">application/json</span>
+                    <svg viewBox="0 0 16 16" aria-hidden="true" class="dropdown__icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg>
+                  </button>
+                  <div role="menu" class="dropdown__content" id="getContactBody" hidden>
+                    <a href="#contactApplicationXml" data-example role="menuitem" class="dropdown__item" tabindex="-1">application/xml</a>
+                    <a href="#contactApplicationJson" data-example role="menuitem" class="dropdown__item" tabindex="-1" hidden>application/json</a>
+                  </div>
+                </div>
+              </div>
+              <div id="contactApplicationJson" class="body__content"><span class="body__type">Array of: <a href="#contacts" class="datatype">Contacts</a></span>
+                <button type="button" class="btn--naked tooltip js-tooltip-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="contactDatatypeTooltip">
+                  <span class="sr-only">Contacts details</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"  viewBox="0 0 16 16" aria-hidden="true">
+                  <g>
+                    <path d="M8,0 C12.418278,0 16,3.581722 16,8 C16,12.418278 12.418278,16 8,16 C3.581722,16 0,12.418278 0,8 C0,3.581722 3.581722,0 8,0 Z M7.88888889,6.11262338 C7.39796911,6.11262338 7,6.51059249 7,7.00151227 L7,11.4459567 C7,11.9368765 7.39796911,12.3348456 7.88888889,12.3348456 C8.37980867,12.3348456 8.77777778,11.9368765 8.77777778,11.4459567 L8.77777778,7.00151227 C8.77777778,6.51059249 8.37980867,6.11262338 7.88888889,6.11262338 Z M7.88888889,3.44293218 C7.39796911,3.44293218 7,3.84090129 7,4.33182107 C7,4.82274084 7.39796911,5.22070996 7.88888889,5.22070996 C8.37980867,5.22070996 8.77777778,4.82274084 8.77777778,4.33182107 C8.77777778,3.84090129 8.37980867,3.44293218 7.88888889,3.44293218 Z"></path>
+                  </g>
+                  </svg>
+                </button>
+                <div class="definition-example">
+                  <div class="definition-example__title"><span class="definition-example__response">Status 200</span><span class="definition-example__mimetype">application/json</span></div>
+                  <div role="region" tabindex="0" class="code-container" aria-labelledby="contactApplicationJson">
+            <pre><code>[{
+  "id": "0e8dd830-ad98-11e6-bf2e-47644ada7c0f",
+  "firstName": "John",
+  "lastName": "Smith",
+  "birthday": 152755200000,
+  "active": true,
+  "rank": 1,
+  "company": "0e8cedd0-ad98-11e6-bf2e-47644ada7c0f0e8cedd0-ad98-11e6-bf2e-47644ada7c0f0e8cedd0-ad98-11e6-bf2e-47644ada7c0f0e8cedd0-ad98-11e6-bf2e-47644ada7c0f0e8cedd0-ad98-11e6-bf2e-47644ada7c0f0e8cedd0-ad98-11e6-bf2e-47644ada7c0f"
+}]</code></pre>
+                  </div>
+                </div>
+              </div>
+            <div id="contactApplicationXml" class="body__content" hidden ><span class="body__type">AllOf of: <a href="#contacts" class="datatype">Contacts</a></span>
+                <button type="button" class="btn--naked tooltip js-tooltip-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="contactDatatypeTooltip">
+                  <span class="sr-only">Test details</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"  viewBox="0 0 16 16" aria-hidden="true">
+                    <g>
+                      <path d="M8,0 C12.418278,0 16,3.581722 16,8 C16,12.418278 12.418278,16 8,16 C3.581722,16 0,12.418278 0,8 C0,3.581722 3.581722,0 8,0 Z M7.88888889,6.11262338 C7.39796911,6.11262338 7,6.51059249 7,7.00151227 L7,11.4459567 C7,11.9368765 7.39796911,12.3348456 7.88888889,12.3348456 C8.37980867,12.3348456 8.77777778,11.9368765 8.77777778,11.4459567 L8.77777778,7.00151227 C8.77777778,6.51059249 8.37980867,6.11262338 7.88888889,6.11262338 Z M7.88888889,3.44293218 C7.39796911,3.44293218 7,3.84090129 7,4.33182107 C7,4.82274084 7.39796911,5.22070996 7.88888889,5.22070996 C8.37980867,5.22070996 8.77777778,4.82274084 8.77777778,4.33182107 C8.77777778,3.84090129 8.37980867,3.44293218 7.88888889,3.44293218 Z"></path>
+                    </g>
+                  </svg>
+                </button>
+                <div class="definition-example" >
+                  <div class="definition-example__title"><span class="definition-example__response">Status 200</span><span class="definition-example__mimetype">application/xml</span></div>
+                  <div role="region" tabindex="0" class="code-container" aria-labelledby="contactApplicationXml">
+            <pre><code>&lt;contact id="0e8dd830-ad98-11e6-bf2e-47644ada7c0f"
+  firstName="John"
+  lastName="Smith"
+  birthday="152755200000"
+  active="true"
+  rank="1"
+  company="0e8cedd0-ad98-11e6-bf2e-47644ada7c0f" /&gt;</code></pre>
+                  </div>
+                </div>
+              </div>
+          </details>
+        </div>
+        <div class="response">
+          <details class="response__detail">
+            <summary class="response__type"><span class="response__type--content"><span class="badge badge--warn">400</span> Status 400</span> <svg viewBox="0 0 16 16" aria-hidden="true" class="response__type--icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg></summary>
+          </details>
+        </div>
+        </div>
+      </div>
+      <div class="operation__content-info operation__content-info--odd">
+        <button type="button" class="try-in-tester btn btn--primary btn-as-link">Try in API Tester</button>
+      </div>
+    </section>
+    <section class="operation" aria-labelledby="postContacts">
+      <div class="operation__content">
+        <div class="operation__header">
+          <h3 id="postContacts">POST /contacts/</h3>
+          <span class="operation--post operation--default">POST</span>
+        </div>
+        <div class="operation__description wysiwyg">After you’ve completed the steps in <a href="#">Get Ready to Use the People API</a> you are ready to read and manage contacts. The following code samples demonstrate how to send a few simple requests:</div>
+        <div class="definition__content definition">
+          <h4>Request</h4>
+          <table>
+            <caption class="request__parameters">Query parameters</caption>
+            <thead class="sr-only">
+            <tr>
+              <th scope="col">name</th>
+              <th scope="col">description</th>
+              <th scope="col">type</th>
+              <th scope="col">examples</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="request__parameter">
+              <th scope="row">id</th>
+              <td>Size of the page to retrieve.</td>
+              <td class="request__parameter-type">Integer <span class="badge">Optional</span></td>
+              <td><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">10</span></div></td>
+            </tr>
+            <tr class="request__parameter">
+              <th scope="row">$sort</th>
+              <td>Order in which to retrieve the results. Multiple sort criteria can be passed</td>
+              <td class="request__parameter-type">String <span class="badge">Optional</span></td>
+              <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span>
+                  <ul class="example">
+                    <li class="example__value badge">birthday DESC</li>
+                    <li class="example__value badge">birthday ASC,rank DESC</li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+            <tr class="request__parameter">
+              <th scope="row">firstName</th>
+              <td>Allows to filter the collection of results by the value of field</td>
+              <td class="request__parameter-type">String <span class="badge">Optional</span></td>
+              <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">John</span></div></td>
+            </tr>
+            <tr class="request__parameter">
+              <th scope="row">lastName</th>
+              <td>Allows to filter the collection of results by the value of field</td>
+              <td class="request__parameter-type">String <span class="badge">Optional</span></td>
+              <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">John</span></div></td>
+            </tr>
+            <tr class="request__parameter">
+              <th scope="row">active</th>
+              <td>Allows to filter the collection of results by the value of field</td>
+              <td class="request__parameter-type">String <span class="badge">Optional</span></td>
+              <td class="request__parameter-example"><div class="metadata">Examples
+                  <ul class="example">
+                    <li class="example__value badge">true</li>
+                    <li class="example__value badge">false</li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+            <tr class="request__parameter">
+              <th scope="row">company</th>
+              <td>Allows to filter the collection of results by the value of field</td>
+              <td class="request__parameter-type">String <span class="badge">Optional</span></td>
+              <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">0e8c9fb0-ad98-11e6-bf2e-47644ada7c0f</span></div></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="operation__content-info operation__content-info--even">
+        <button type="button" class="try-in-tester btn btn--primary btn-as-link">Try in API Tester</button>
+      </div>
+    </section>
+    <section class="operation" aria-labelledby="loadContacts">
+      <div class="operation__content">
+        <div class="operation__header">
+          <h3 id="loadContacts">Load a Contact</h3>
+          <span class="operation--get operation--default">GET</span> <span class="operation__url">/contacts/{contactid}</span>
+        </div>
+        <div class="operation__description wysiwyg">Loads a Contact</div>
+        <div class="definition__content definition">
+          <div class="definition__main">
+            <h4>Request</h4>
+            <table>
+              <caption class="request__parameters">Path variables</caption>
+              <thead class="sr-only">
+              <tr>
+                <th scope="col">name</th>
+                <th scope="col">description</th>
+                <th scope="col">type</th>
+                <th scope="col">examples</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="request__parameter">
+                <th scope="row">contactId</th>
+                <td>Identifier of the Contact</td>
+                <td class="request__parameter-type">String <span class="badge badge--warn">Required</span></td>
+                <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">0e8dd830-ad98-11e6-bf2e-47644ada7c0f</span></div></td>
+              </tr>
+              <tr class="request__parameter">
+                <th scope="row">contactName</th>
+                <td>Name of the Contact</td>
+                <td class="request__parameter-type">String <span class="badge">Optional</span></td>
+                <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">Seth Putnam</span></div></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="definition__content definition">
+          <h4>Response</h4>
+          <div class="response">
+            <details open class="response__detail">
+              <summary class="response__type"><span class="response__type--content"><span class="badge badge--3xx">300</span> Status 300</span> <svg viewBox="0 0 16 16" aria-hidden="true" class="response__type--icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg></summary>
+                <div class="response__content">
+                <h5 class="response__body">Body</h5>
+                <div class="dropdown">
+                  <button type="button" class="btn btn__version js-dropdown" aria-controls="loadContactBody" aria-haspopup="true" aria-expanded="false"><span class="js-dropdown-text  response__mimetype">application/json</span>
+                    <svg viewBox="0 0 16 16" aria-hidden="true" class="dropdown__icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg>
+                  </button>
+                  <div id="loadContactBody" role="menu" class="dropdown__content" hidden>
+                    <a href="#loadContactApplicationXml" data-example role="menuitem" class="dropdown__item" tabindex="-1">application/xml</a>
+                    <a href="#loadContactApplicationJson" data-example role="menuitem" class="dropdown__item" tabindex="-1" hidden>application/json</a>
+                  </div>
+                </div>
+              </div>
+              <div id="loadContactApplicationJson" class="body__content">Array of: <a href="#contacts" class="datatype">Contacts</a>
+                <button type="button" class="btn--naked tooltip js-tooltip-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="contactDatatypeTooltip">
+                  <span class="sr-only">Contacts details</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"  viewBox="0 0 16 16" aria-hidden="true">
+                    <g>
+                      <path d="M8,0 C12.418278,0 16,3.581722 16,8 C16,12.418278 12.418278,16 8,16 C3.581722,16 0,12.418278 0,8 C0,3.581722 3.581722,0 8,0 Z M7.88888889,6.11262338 C7.39796911,6.11262338 7,6.51059249 7,7.00151227 L7,11.4459567 C7,11.9368765 7.39796911,12.3348456 7.88888889,12.3348456 C8.37980867,12.3348456 8.77777778,11.9368765 8.77777778,11.4459567 L8.77777778,7.00151227 C8.77777778,6.51059249 8.37980867,6.11262338 7.88888889,6.11262338 Z M7.88888889,3.44293218 C7.39796911,3.44293218 7,3.84090129 7,4.33182107 C7,4.82274084 7.39796911,5.22070996 7.88888889,5.22070996 C8.37980867,5.22070996 8.77777778,4.82274084 8.77777778,4.33182107 C8.77777778,3.84090129 8.37980867,3.44293218 7.88888889,3.44293218 Z"></path>
+                    </g>
+                  </svg>
+                </button>
+                <div class="definition-example">
+                  <div class="definition-example__title" id="loadContactApplicationJsonTitle"><span class="definition-example__response">Status 300</span><span class="definition-example__mimetype">application/json</span></div>
+                  <div role="region" tabindex="0" class="code-container" aria-labelledby="loadContactApplicationJsonTitle">
+              <pre><code>[{
+    "id": "0e8dd830-ad98-11e6-bf2e-47644ada7c0f",
+    "firstName": "John",
+    "lastName": "Smith",
+    "birthday": 152755200000,
+    "active": true,
+    "rank": 1,
+    "company": "0e8cedd0-ad98-11e6-bf2e-47644ada7c0f0e8cedd0-ad98-11e6-bf2e-47644ada7c0f0e8cedd0-ad98-11e6-bf2e-47644ada7c0f0e8cedd0-ad98-11e6-bf2e-47644ada7c0f"
+    }]</code></pre>
+                  </div>
+                </div>
+              </div>
+              <div id="loadContactApplicationXml" class="body__content" hidden>Array of: <a href="#contacts" class="datatype">Contacts</a>
+                <button type="button" class="btn--naked tooltip js-tooltip-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="contactDatatypeTooltip">
+                  <span class="sr-only">Contacts details</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"  viewBox="0 0 16 16" aria-hidden="true">
+                    <g>
+                      <path d="M8,0 C12.418278,0 16,3.581722 16,8 C16,12.418278 12.418278,16 8,16 C3.581722,16 0,12.418278 0,8 C0,3.581722 3.581722,0 8,0 Z M7.88888889,6.11262338 C7.39796911,6.11262338 7,6.51059249 7,7.00151227 L7,11.4459567 C7,11.9368765 7.39796911,12.3348456 7.88888889,12.3348456 C8.37980867,12.3348456 8.77777778,11.9368765 8.77777778,11.4459567 L8.77777778,7.00151227 C8.77777778,6.51059249 8.37980867,6.11262338 7.88888889,6.11262338 Z M7.88888889,3.44293218 C7.39796911,3.44293218 7,3.84090129 7,4.33182107 C7,4.82274084 7.39796911,5.22070996 7.88888889,5.22070996 C8.37980867,5.22070996 8.77777778,4.82274084 8.77777778,4.33182107 C8.77777778,3.84090129 8.37980867,3.44293218 7.88888889,3.44293218 Z"></path>
+                    </g>
+                  </svg>
+                </button>
+                <div class="definition-example">
+                  <div class="definition-example__title" id="loadContactApplicationXmlTitle"><span class="definition-example__response">Status 300</span><span class="definition-example__mimetype">application/xml</span></div>
+                  <div role="region" tabindex="0" class="code-container" aria-labelledby="loadContactApplicationXmlTitle">
+            <pre><code>[{
+"id": "0e8dd830-ad98-11e6-bf2e-47644ada7c0f",
+"firstName": "John",
+"lastName": "Smith",
+"birthday": 152755200000,
+"active": true,
+"rank": 1,
+"company": "0e8cedd0-ad98-11e6-bf2e-47644ada7c0f"
+}]</code></pre>
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+          <div class="response">
+            <details class="response__detail">
+              <summary class="response__type"><span class="response__type--content"><span class="badge badge--warn">400</span> Status 400</span> <svg viewBox="0 0 16 16" aria-hidden="true" class="response__type--icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg></summary>
+            </details>
+          </div>
+        </div>
+      </div>
+      <div class="operation__content-info operation__content-info--odd">
+        <button type="button" class="try-in-tester btn btn--primary btn-as-link">Try in API Tester</button>
+      </div>
+    </section>
+    <section class="operation" aria-labelledby="deleteContacts">
+      <div class="operation__content">
+        <div class="operation__header">
+          <h3 id="deleteContacts">Delete a contact</h3>
+          <span class="operation--delete operation--default">DELETE</span> <span class="operation__url">/contacts/{contactid}</span>
+        </div>
+        <div class="operation__description wysiwyg">Delete a Contact</div>
+        <div class="definition__security definition">
+          <h4>Security</h4>
+          <a href="#contactsAuth">Contacts_Auth</a> <span id="definition__security-scope">(Scopes: <button type="button" class="btn--naked tooltip js-tooltip-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="contactDatatypeTooltip">
+                  <span class="sr-only">write:id details</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"  viewBox="0 0 16 16" aria-hidden="true">
+                    <g>
+                      <path d="M8,0 C12.418278,0 16,3.581722 16,8 C16,12.418278 12.418278,16 8,16 C3.581722,16 0,12.418278 0,8 C0,3.581722 3.581722,0 8,0 Z M7.88888889,6.11262338 C7.39796911,6.11262338 7,6.51059249 7,7.00151227 L7,11.4459567 C7,11.9368765 7.39796911,12.3348456 7.88888889,12.3348456 C8.37980867,12.3348456 8.77777778,11.9368765 8.77777778,11.4459567 L8.77777778,7.00151227 C8.77777778,6.51059249 8.37980867,6.11262338 7.88888889,6.11262338 Z M7.88888889,3.44293218 C7.39796911,3.44293218 7,3.84090129 7,4.33182107 C7,4.82274084 7.39796911,5.22070996 7.88888889,5.22070996 C8.37980867,5.22070996 8.77777778,4.82274084 8.77777778,4.33182107 C8.77777778,3.84090129 8.37980867,3.44293218 7.88888889,3.44293218 Z"></path>
+                    </g>
+                  </svg></button>write:id, <button type="button" class="btn--naked tooltip js-tooltip-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="contactDatatypeTooltip">
+                  <span class="sr-only">read:id details</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"  viewBox="0 0 16 16" aria-hidden="true">
+                    <g>
+                      <path d="M8,0 C12.418278,0 16,3.581722 16,8 C16,12.418278 12.418278,16 8,16 C3.581722,16 0,12.418278 0,8 C0,3.581722 3.581722,0 8,0 Z M7.88888889,6.11262338 C7.39796911,6.11262338 7,6.51059249 7,7.00151227 L7,11.4459567 C7,11.9368765 7.39796911,12.3348456 7.88888889,12.3348456 C8.37980867,12.3348456 8.77777778,11.9368765 8.77777778,11.4459567 L8.77777778,7.00151227 C8.77777778,6.51059249 8.37980867,6.11262338 7.88888889,6.11262338 Z M7.88888889,3.44293218 C7.39796911,3.44293218 7,3.84090129 7,4.33182107 C7,4.82274084 7.39796911,5.22070996 7.88888889,5.22070996 C8.37980867,5.22070996 8.77777778,4.82274084 8.77777778,4.33182107 C8.77777778,3.84090129 8.37980867,3.44293218 7.88888889,3.44293218 Z"></path>
+                    </g>
+                  </svg></button>read:id)</span>
+        </div>
+        <div class="definition__content definition">
+          <h4>Request</h4>
+          <table>
+            <caption class="request__parameters">Path variables</caption>
+            <thead class="sr-only">
+            <tr>
+              <th scope="col">name</th>
+              <th scope="col">description</th>
+              <th scope="col">type</th>
+              <th scope="col">examples</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="request__parameter">
+              <th scope="row">contactId</th>
+              <td>Identifier of the Contact</td>
+              <td class="request__parameter-type">String <span class="badge badge--warn">Required</span></td>
+              <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">0e8dd830-ad98-11e6-bf2e-47644ada7c0f</span></div></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="definition__content definition">
+          <h4>Response</h4>
+          <div class="response">
+            <details class="response__detail">
+              <summary class="response__type"><span class="response__type--content"><span class="badge badge--1xx">100</span> Status 100</span> <svg viewBox="0 0 16 16" aria-hidden="true" class="response__type--icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg></summary>
+              <div class="response__content">
+                <h5 class="response__body">Body</h5>
+                <div class="dropdown">
+                  <button type="button" class="btn btn__version js-dropdown" aria-controls="deleteContactBody" aria-haspopup="true" aria-expanded="false"><span class="js-dropdown-text response__mimetype">application/json</span>
+                    <svg viewBox="0 0 16 16" aria-hidden="true" class="dropdown__icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg>
+                  </button>
+                  <div id="deleteContactBody" role="menu" class="dropdown__content" hidden>
+                    <a href="#deleteContactApplicationXml" data-example role="menuitem" class="dropdown__item" tabindex="-1">application/xml</a>
+                    <a href="#deleteContactApplicationJson" data-example role="menuitem" class="dropdown__item" tabindex="-1" hidden>application/json</a>
+                  </div>
+                </div>
+              </div>
+              <div class="body__content" id="deleteContactApplicationJson">Array of: <a href="#contacts" class="datatype">Contacts</a>
+                <button type="button" class="btn--naked tooltip js-tooltip-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="contactDatatypeTooltip">
+                  <span class="sr-only">Contacts details</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"  viewBox="0 0 16 16" aria-hidden="true">
+                    <g>
+                      <path d="M8,0 C12.418278,0 16,3.581722 16,8 C16,12.418278 12.418278,16 8,16 C3.581722,16 0,12.418278 0,8 C0,3.581722 3.581722,0 8,0 Z M7.88888889,6.11262338 C7.39796911,6.11262338 7,6.51059249 7,7.00151227 L7,11.4459567 C7,11.9368765 7.39796911,12.3348456 7.88888889,12.3348456 C8.37980867,12.3348456 8.77777778,11.9368765 8.77777778,11.4459567 L8.77777778,7.00151227 C8.77777778,6.51059249 8.37980867,6.11262338 7.88888889,6.11262338 Z M7.88888889,3.44293218 C7.39796911,3.44293218 7,3.84090129 7,4.33182107 C7,4.82274084 7.39796911,5.22070996 7.88888889,5.22070996 C8.37980867,5.22070996 8.77777778,4.82274084 8.77777778,4.33182107 C8.77777778,3.84090129 8.37980867,3.44293218 7.88888889,3.44293218 Z"></path>
+                    </g>
+                  </svg>
+                </button>
+                <div class="definition-example">
+                  <div class="definition-example__title"  id="deleteContactApplicationJsonTitle"><span class="definition-example__response">Status 200</span><span class="definition-example__mimetype">application/json</span></div>
+                  <div role="region" tabindex="0" class="code-container" aria-labelledby="deleteContactApplicationJsonTitle">
+              <pre><code>[{
+  "id": "0e8dd830-ad98-11e6-bf2e-47644ada7c0f",
+  "firstName": "John",
+  "lastName": "Smith",
+  "birthday": 152755200000,
+  "active": true,
+  "rank": 1,
+  "company": "0e8cedd0-ad98-11e6-bf2e-47644ada7c0f"
+  }]</code></pre>
+                  </div>
+                </div>
+              </div>
+              <div class="body__content" id="deleteContactApplicationXml" hidden>Array of: <a href="#contacts" class="datatype">Contacts</a>
+                <button type="button" class="btn--naked tooltip js-tooltip-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="contactDatatypeTooltip">
+                  <span class="sr-only">Contacts details</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"  viewBox="0 0 16 16" aria-hidden="true">
+                    <g>
+                      <path d="M8,0 C12.418278,0 16,3.581722 16,8 C16,12.418278 12.418278,16 8,16 C3.581722,16 0,12.418278 0,8 C0,3.581722 3.581722,0 8,0 Z M7.88888889,6.11262338 C7.39796911,6.11262338 7,6.51059249 7,7.00151227 L7,11.4459567 C7,11.9368765 7.39796911,12.3348456 7.88888889,12.3348456 C8.37980867,12.3348456 8.77777778,11.9368765 8.77777778,11.4459567 L8.77777778,7.00151227 C8.77777778,6.51059249 8.37980867,6.11262338 7.88888889,6.11262338 Z M7.88888889,3.44293218 C7.39796911,3.44293218 7,3.84090129 7,4.33182107 C7,4.82274084 7.39796911,5.22070996 7.88888889,5.22070996 C8.37980867,5.22070996 8.77777778,4.82274084 8.77777778,4.33182107 C8.77777778,3.84090129 8.37980867,3.44293218 7.88888889,3.44293218 Z"></path>
+                    </g>
+                  </svg>
+                </button>
+                <div class="definition-example">
+                  <div class="definition-example__title"  id="deleteContactApplicationXmlTitle"><span class="definition-example__response">Status 200</span><span class="definition-example__mimetype">application/xml</span></div>
+                  <div role="region" tabindex="0" class="code-container" aria-labelledby="deleteContactApplicationXmlTitle">
+            <pre><code>[{
+  "id": "0e8dd830-ad98-11e6-bf2e-47644ada7c0f",
+  "firstName": "John",
+  "lastName": "Smith",
+  "birthday": 152755200000,
+  "active": true,
+  "rank": 1,
+  "company": "0e8cedd0-ad98-11e6-bf2e-47644ada7c0f"
+  }]</code></pre>
+                  </div>
+                </div>
+              </div>
+          </details>
+
+          </div>
+          <div class="response">
+          <details class="response__detail">
+            <summary class="response__type"><span class="response__type--content"><span class="badge badge--warn">400</span> Status 400</span> <svg viewBox="0 0 16 16" aria-hidden="true" class="response__type--icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg></summary>
+          </details>
+          </div>
+        </div>
+      </div>
+      <div class="operation__content-info operation__content-info--even">
+        <button type="button" class="try-in-tester btn btn--primary btn-as-link">Try in API Tester</button>
+      </div>
+    </section>
+    <section class="operation" aria-labelledby="updateContacts">
+      <div class="operation__content">
+        <div class="operation__header">
+          <h3 id="updateContacts">Update a contact</h3>
+          <span class="operation--put operation--default">PUT</span> <span class="operation__url">/contacts/{contactid}</span>
+        </div>
+        <div class="operation__description wysiwyg">Update a Contact</div>
+        <div class="definition__security definition">
+          <h4>Security</h4>
+          <a href="#api_key">API_KEY</a>
+        </div>
+        <div class="definition__content definition">
+            <h4>Request</h4>
+            <table>
+              <caption class="request__parameters">Path variables</caption>
+              <thead class="sr-only">
+              <tr>
+                <th scope="col">name</th>
+                <th scope="col">description</th>
+                <th scope="col">type</th>
+                <th scope="col">examples</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="request__parameter">
+                <th scope="row">contactId</th>
+                <td>Identifier of the Contact</td>
+                <td class="request__parameter-type">String <span class="badge badge--warn">Required</span></td>
+                <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">0e8dd830-ad98-11e6-bf2e-47644ada7c0f</span></div></td>
+              </tr>
+              </tbody>
+            </table>
+        </div>
+        <div class="definition__content definition">
+          <h4>Response</h4>
+          <div class="response">
+            <details open class="response__detail">
+              <summary class="response__type"><span class="response__type--content"><span class="badge badge--5xx">500</span> Status 500</span> <svg viewBox="0 0 16 16" aria-hidden="true" class="response__type--icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg></summary>
+                <div class="response__content">
+                  <h5 class="response__body">Body</h5>
+                  <span class="response__mimetype">application/json</span>
+                </div>
+                <p class="body__content"><a href="#contacts" class="datatype">Contacts</a> <button type="button" class="btn--naked tooltip js-tooltip-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="contactDatatypeTooltip">
+                  <span class="sr-only">Contacts details</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"  viewBox="0 0 16 16" aria-hidden="true">
+                    <g>
+                      <path d="M8,0 C12.418278,0 16,3.581722 16,8 C16,12.418278 12.418278,16 8,16 C3.581722,16 0,12.418278 0,8 C0,3.581722 3.581722,0 8,0 Z M7.88888889,6.11262338 C7.39796911,6.11262338 7,6.51059249 7,7.00151227 L7,11.4459567 C7,11.9368765 7.39796911,12.3348456 7.88888889,12.3348456 C8.37980867,12.3348456 8.77777778,11.9368765 8.77777778,11.4459567 L8.77777778,7.00151227 C8.77777778,6.51059249 8.37980867,6.11262338 7.88888889,6.11262338 Z M7.88888889,3.44293218 C7.39796911,3.44293218 7,3.84090129 7,4.33182107 C7,4.82274084 7.39796911,5.22070996 7.88888889,5.22070996 C8.37980867,5.22070996 8.77777778,4.82274084 8.77777778,4.33182107 C8.77777778,3.84090129 8.37980867,3.44293218 7.88888889,3.44293218 Z"></path>
+                    </g>
+                  </svg></button></p>
+            </details>
+          </div>
+          <div class="response">
+            <details class="response__detail">
+              <summary class="response__type"><span class="response__type--content"><span class="badge badge--warn">400</span> Status 400</span> <svg viewBox="0 0 16 16" aria-hidden="true" class="response__type--icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg></summary>
+            </details>
+          </div>
+        </div>
+      </div>
+      <div class="operation__content-info operation__content-info--odd">
+        <button type="button" class="try-in-tester btn btn--primary btn-as-link">Try in API Tester</button>
+      </div>
+    </section>
+    <section class="operation" aria-labelledby="patchContacts">
+      <div class="operation__content">
+        <div class="operation__header">
+          <h3 id="patchContacts">Patch a contact</h3>
+          <span class="operation--patch operation--default">PATCH</span> <span class="operation__url">/contacts/{contactid}</span>
+        </div>
+        <div class="operation__description wysiwyg">Patch a Contact</div>
+        <div class="definition__security definition">
+          <h4>Security</h4>
+          <a href="#contacts_Auth">CONTACT_AUTH</a>
+        </div>
+        <div class="definition__content definition">
+            <h4>Request</h4>
+            <table>
+              <caption class="request__parameters">Path variables</caption>
+              <thead class="sr-only">
+              <tr>
+                <th scope="col">name</th>
+                <th scope="col">description</th>
+                <th scope="col">type</th>
+                <th scope="col">examples</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="request__parameter">
+                <th scope="row">contactId</th>
+                <td>Identifier of the Contact</td>
+                <td class="request__parameter-type">String <span class="badge badge--warn">Required</span></td>
+                <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">0e8dd830-ad98-11e6-bf2e-47644ada7c0f</span></div></td>
+              </tr>
+              </tbody>
+            </table>
+        </div>
+        <div class="definition__content definition">
+          <h4>Response</h4>
+          <div class="response">
+            <details open class="response__detail">
+              <summary class="response__type"><span class="response__type--content"><span class="badge badge--success">200</span> Status 200</span> <svg viewBox="0 0 16 16" aria-hidden="true" class="response__type--icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg></summary>
+                <div class="response__content">
+                  <h5 class="response__body">Body</h5>
+                  <span class="response__mimetype">application/json</span>
+                </div>
+                <p class="body__content" id="patchContactApplicationJson"><a href="#contacts" class="datatype">Contacts</a> <button type="button" class="btn--naked tooltip js-tooltip-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="contactDatatypeTooltip">
+                  <span class="sr-only">Contacts details</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"  viewBox="0 0 16 16" aria-hidden="true">
+                    <g>
+                      <path d="M8,0 C12.418278,0 16,3.581722 16,8 C16,12.418278 12.418278,16 8,16 C3.581722,16 0,12.418278 0,8 C0,3.581722 3.581722,0 8,0 Z M7.88888889,6.11262338 C7.39796911,6.11262338 7,6.51059249 7,7.00151227 L7,11.4459567 C7,11.9368765 7.39796911,12.3348456 7.88888889,12.3348456 C8.37980867,12.3348456 8.77777778,11.9368765 8.77777778,11.4459567 L8.77777778,7.00151227 C8.77777778,6.51059249 8.37980867,6.11262338 7.88888889,6.11262338 Z M7.88888889,3.44293218 C7.39796911,3.44293218 7,3.84090129 7,4.33182107 C7,4.82274084 7.39796911,5.22070996 7.88888889,5.22070996 C8.37980867,5.22070996 8.77777778,4.82274084 8.77777778,4.33182107 C8.77777778,3.84090129 8.37980867,3.44293218 7.88888889,3.44293218 Z"></path>
+                    </g>
+                  </svg></button></p>
+            </details>
+          </div>
+          <div class="response">
+            <details class="response__detail">
+              <summary class="response__type"><span class="response__type--content"><span class="badge badge--warn">400</span> Status 400</span> <svg viewBox="0 0 16 16" aria-hidden="true" class="response__type--icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg></summary>
+            </details>
+          </div>
+        </div>
+      </div>
+      <div class="operation__content-info">
+        <button type="button" class="try-in-tester btn btn--primary btn-as-link">Try in API Tester</button>
+      </div>
+    </section>
+    <section class="operation" aria-labelledby="headContacts">
+      <div class="operation__content">
+        <div class="operation__header">
+          <h3 id="headContacts">head contact</h3>
+          <span class="operation--head operation--default">HEAD</span> <span class="operation__url">/contacts/{contactid}</span>
+        </div>
+        <div class="operation__description wysiwyg">HEAD a Contact</div>
+        <div class="definition__security definition">
+          <h4>Security</h4>
+          <a href="#contacts_Auth">CONTACT_AUTH</a>
+        </div>
+        <div class="definition__content definition">
+            <h4>Request</h4>
+            <table>
+              <caption class="request__parameters">Path variables</caption>
+              <thead class="sr-only">
+              <tr>
+                <th scope="col">name</th>
+                <th scope="col">description</th>
+                <th scope="col">type</th>
+                <th scope="col">examples</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="request__parameter">
+                <th scope="row">contactId</th>
+                <td>Identifier of the Contact</td>
+                <td class="request__parameter-type">String <span class="badge badge--warn">Required</span></td>
+                <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">0e8dd830-ad98-11e6-bf2e-47644ada7c0f</span></div></td>
+              </tr>
+              </tbody>
+            </table>
+        </div>
+        <div class="definition__content definition">
+          <h4>Response</h4>
+          <div class="response">
+            <details open class="response__detail">
+              <summary class="response__type"><span class="response__type--content"><span class="badge badge--success">200</span> Status 200</span> <svg viewBox="0 0 16 16" aria-hidden="true" class="response__type--icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg></summary>
+              <div class="response__content">
+                <h5 class="response__body">Body</h5>
+                <span class="response__mimetype">application/json</span>
+              </div>
+              <p class="body__content"><a href="#contacts" class="datatype">Contacts</a> <button type="button" class="btn--naked tooltip js-tooltip-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="contactDatatypeTooltip">
+                <span class="sr-only">Contacts details</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"  viewBox="0 0 16 16" aria-hidden="true">
+                  <g>
+                    <path d="M8,0 C12.418278,0 16,3.581722 16,8 C16,12.418278 12.418278,16 8,16 C3.581722,16 0,12.418278 0,8 C0,3.581722 3.581722,0 8,0 Z M7.88888889,6.11262338 C7.39796911,6.11262338 7,6.51059249 7,7.00151227 L7,11.4459567 C7,11.9368765 7.39796911,12.3348456 7.88888889,12.3348456 C8.37980867,12.3348456 8.77777778,11.9368765 8.77777778,11.4459567 L8.77777778,7.00151227 C8.77777778,6.51059249 8.37980867,6.11262338 7.88888889,6.11262338 Z M7.88888889,3.44293218 C7.39796911,3.44293218 7,3.84090129 7,4.33182107 C7,4.82274084 7.39796911,5.22070996 7.88888889,5.22070996 C8.37980867,5.22070996 8.77777778,4.82274084 8.77777778,4.33182107 C8.77777778,3.84090129 8.37980867,3.44293218 7.88888889,3.44293218 Z"></path>
+                  </g>
+                </svg></button>
+              </p>
+            </details>
+          </div>
+          <div class="response">
+            <details class="response__detail">
+              <summary class="response__type"><span class="response__type--content"><span class="badge badge--warn">400</span> Status 400</span> <svg viewBox="0 0 16 16" aria-hidden="true" class="response__type--icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg></summary>
+            </details>
+          </div>
+        </div>
+      </div>
+      <div class="operation__content-info operation__content-info--odd">
+        <button type="button" class="try-in-tester btn btn--primary btn-as-link">Try in API Tester</button>
+      </div>
+    </section>
+    <section class="operation" aria-labelledby="optionsContacts">
+      <div class="operation__content">
+        <div class="operation__header">
+          <h3 id="optionsContacts">options contact</h3>
+          <span class="operation--options operation--default">OPTIONS</span> <span class="operation__url">/contacts/{contactid}</span>
+        </div>
+        <div class="operation__description wysiwyg">option Contact</div>
+        <div class="definition__security definition">
+          <h4>Security</h4>
+          <a href="#contacts_Auth">CONTACT_AUTH</a>
+        </div>
+        <div class="definition__content definition">
+            <h4>Request</h4>
+            <table>
+              <caption class="request__parameters">Path variables</caption>
+              <thead class="sr-only">
+              <tr>
+                <th scope="col">name</th>
+                <th scope="col">description</th>
+                <th scope="col">type</th>
+                <th scope="col">examples</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="request__parameter">
+                <th scope="row">contactId</th>
+                <td>Identifier of the Contact</td>
+                <td class="request__parameter-type">String <span class="badge badge--warn">Required</span></td>
+                <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">0e8dd830-ad98-11e6-bf2e-47644ada7c0f</span></div></td>
+              </tr>
+              </tbody>
+            </table>
+        </div>
+        <div class="definition__content definition">
+          <h4>Response</h4>
+          <div class="response">
+            <details open class="response__detail">
+              <summary class="response__type"><span class="response__type--content"><span class="badge badge--success">200</span> Status 200</span> <svg viewBox="0 0 16 16" aria-hidden="true" class="response__type--icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg></summary>
+                <div class="response__content">
+                  <h5 class="response__body">Body</h5>
+                  <span class="response__mimetype">application/json</span>
+                </div>
+                <p class="body__content"><a href="#contacts" class="datatype">Contacts</a> <button type="button" class="btn--naked tooltip js-tooltip-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="contactDatatypeTooltip">
+                  <span class="sr-only">Contacts details</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"  viewBox="0 0 16 16" aria-hidden="true">
+                    <g>
+                      <path d="M8,0 C12.418278,0 16,3.581722 16,8 C16,12.418278 12.418278,16 8,16 C3.581722,16 0,12.418278 0,8 C0,3.581722 3.581722,0 8,0 Z M7.88888889,6.11262338 C7.39796911,6.11262338 7,6.51059249 7,7.00151227 L7,11.4459567 C7,11.9368765 7.39796911,12.3348456 7.88888889,12.3348456 C8.37980867,12.3348456 8.77777778,11.9368765 8.77777778,11.4459567 L8.77777778,7.00151227 C8.77777778,6.51059249 8.37980867,6.11262338 7.88888889,6.11262338 Z M7.88888889,3.44293218 C7.39796911,3.44293218 7,3.84090129 7,4.33182107 C7,4.82274084 7.39796911,5.22070996 7.88888889,5.22070996 C8.37980867,5.22070996 8.77777778,4.82274084 8.77777778,4.33182107 C8.77777778,3.84090129 8.37980867,3.44293218 7.88888889,3.44293218 Z"></path>
+                    </g>
+                  </svg></button></p>
+            </details>
+          </div>
+          <div class="response">
+            <details class="response__detail">
+              <summary class="response__type"><span class="response__type--content"><span class="badge badge--warn">400</span> Status 400</span> <svg viewBox="0 0 16 16" aria-hidden="true" class="response__type--icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg></summary>
+            </details>
+          </div>
+        </div>
+      </div>
+      <div class="operation__content-info">
+        <button type="button" class="try-in-tester btn btn--primary btn-as-link">Try in API Tester</button>
+      </div>
+    </section>
+    <section class="datatype" aria-labelledby="contacts">
+      <div class="datatype__content">
+        <div class="datatype__header">
+          <h3 id="contacts">Contact</h3>
+        </div>
+        <div class="definition__dataType definition">
+          <h4>The dataType of a Contact</h4>
+          <table>
+            <caption class="dataType-title sr-only">datatype details</caption>
+            <thead class="sr-only">
+            <tr>
+              <th scope="col">name</th>
+              <th scope="col">description</th>
+              <th scope="col">type</th>
+              <th scope="col">examples</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="dataType__parameter">
+              <th scope="row">id</th>
+              <td>Auto-generated primary key field</td>
+              <td class="dataType__parameter-type">Integer <span class="badge badge--warn">Required</span></td>
+              <td class="dataType__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">0e8dd830-ad98-11e6-bf2e-47644ada7c0f</span></div></td>
+            </tr>
+            <tr class="dataType__parameter">
+              <th scope="row">firstName</th>
+              <td></td>
+              <td class="dataType__parameter-type">String <span class="badge badge--warn">Required</span></td>
+              <td class="dataType__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">Kurt</span></div></td>
+            </tr>
+            <tr class="dataType__parameter">
+              <th scope="row">lastName</th>
+              <td></td>
+              <td class="dataType__parameter-type">String <span class="badge badge--warn">Required</span></td>
+              <td class="dataType__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">Williams</span></div></td>
+            </tr>
+            <tr class="dataType__parameter">
+              <th scope="row">birthday</th>
+              <td>Birthday as unix timestamp (in ms)</td>
+              <td class="dataType__parameter-type">String <span class="badge">Optional</span></td>
+              <td class="dataType__parameter-example"><div class="metadata"><span class="metadata__label">Format</span> <span class="badge">int64</span></div><div class="metadata"><span class="metadata__label">Examples</span> <ul class="example"><li class="badge example__value">173664000000</li><li class="badge example__value">383270400000</li></ul></div></td>
+            </tr>
+            <tr class="dataType__parameter">
+              <th scope="row">active</th>
+              <td></td>
+              <td class="dataType__parameter-type">Boolean <span class="badge">Optional</span></td>
+              <td class="dataType__parameter-example"><div class="metadata"><span class="metadata__label">Default</span> <span class="badge">true</span></div></td>
+            </tr>
+            <tr class="dataType__parameter">
+              <th scope="row">rank</th>
+              <td></td>
+              <td class="dataType__parameter-type">Integer <span class="badge">Optional</span></td>
+              <td class="dataType__parameter-example"><div class="metadata"><span class="metadata__label">Format</span> <span class="badge">int32</span></div>
+                <div class="metadata metadata--min"><span class="metadata__label">Minimum</span><span class="badge">1</span></div>
+                <div class="metadata metadata--max"><span class="metadata__label">Maximum</span> <span class="badge">3</span></div>
+                <div class="metadata metadata--unique"><span class="metadata__label">Unique item</span> <span class="badge">true</span></div>
+                <div class="metadata"><span class="metadata__label">Enum</span> <ul class="enum"><li class="badge enum__value">1</li><li class="badge enum__value">2</li><li class="badge enum__value">3</li></ul></div>
+                <div class="metadata"><span class="metadata__label">Examples</span> <ul class="example"><li class="badge example__value">1</li><li class="badge example__value">2</li><li class="badge example__value">3</li></ul></div>
+                <div class="metadata"><span class="metadata__label">Restriction</span> <span class="badge">Available in response only</span></div>
+              </td>
+            </tr>
+            <tr class="dataType__parameter">
+              <th scope="row">company</th>
+              <td>This property is a reference to a Company</td>
+              <td class="dataType__parameter-type">String <span class="badge">Optional</span></td>
+              <td class="dataType__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">0e8c9fb0-ad98-11e6-bf2e-47644ada7c0f</span></div></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <section class="datatype" aria-labelledby="complexArray">
+      <div class="datatype__content">
+        <div class="datatype__header">
+          <h3 id="complexArray">type</h3>
+        </div>
+        <div class="definition__dataType definition">
+          <h4>type</h4>
+          <table>
+            <caption class="dataType-title sr-only">datatype details</caption>
+            <thead class="sr-only">
+            <tr>
+              <th scope="col">name</th>
+              <th scope="col">description</th>
+              <th scope="col">type</th>
+              <th scope="col">examples</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="dataType__parameter array-parameter array-parameter--main">
+              <th scope="row" aria-describedby="complexArrayDetail">array of array of string</th>
+              <td></td>
+              <td class="dataType__parameter-type"></td>
+              <td class="dataType__parameter-example"></td>
+            </tr>
+            <tr class="array-parameter--container array-parameter">
+              <td colspan="4" class="array-parameter--subtype">
+                <table id="complexArrayDetail">
+                  <caption class="sr-only">Complex param description</caption>
+                  <thead class="sr-only">
+                  <tr>
+                    <th scope="col">name</th>
+                    <th scope="col">description</th>
+                    <th scope="col">type</th>
+                    <th scope="col">examples</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr class="dataType__parameter array-parameter--description">
+                    <th scope="row">array</th>
+                    <td></td>
+                    <td class="request__parameter-type"></td>
+                    <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Format</span> <span class="badge">int32</span></div>
+                      <div class="metadata metadata--min"><span class="metadata__label">Min item</span><span class="badge">1</span></div>
+                      <div class="metadata metadata--max"><span class="metadata__label">Max item</span> <span class="badge">3</span></div>
+                      <div class="metadata metadata--unique"><span class="metadata__label">Unique item</span> <span class="badge">true</span></div>
+                      <div class="metadata"><span class="metadata__label">Enum</span> <ul class="enum"><li class="badge enum__value">1</li><li class="badge enum__value">2</li><li class="badge enum__value">3</li></ul></div>
+                      <div class="metadata"><span class="metadata__label">Examples</span> <ul class="example"><li class="badge example__value">1</li><li class="badge example__value">2</li><li class="badge example__value">3</li></ul></div>
+                    </td>
+                  </tr>
+                  <tr class="dataType__parameter array-parameter--description">
+                    <th scope="row">array</th>
+                    <td>description</td>
+                    <td class="request__parameter-type"></td>
+                    <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">1</span></div></td>
+                  </tr>
+                  <tr class="dataType__parameter array-parameter--description">
+                    <th scope="row">string</th>
+                    <td>description</td>
+                    <td class="request__parameter-type"></td>
+                    <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">1</span></div></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <div id="contactDatatypeTooltip" class="tooltip__content js-tooltip-content" tabindex="-1">
+      <table>
+        <caption class="dataType-title sr-only">datatype details</caption>
+        <thead class="sr-only">
+        <tr>
+          <th scope="col">name</th>
+          <th scope="col">description</th>
+          <th scope="col">type</th>
+          <th scope="col">examples</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="dataType__parameter">
+          <th scope="row">id</th>
+          <td>Auto-generated primary key field</td>
+          <td class="request__parameter-type">Integer <span class="badge badge--warn">Required</span></td>
+          <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">0e8dd830-ad98-11e6-bf2e-47644ada7c0f</span></div></td>
+        </tr>
+        <tr class="dataType__parameter">
+          <th scope="row">firstName</th>
+          <td></td>
+          <td class="request__parameter-type">String <span class="badge badge--warn">Required</span></td>
+          <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">Kurt</span></div></td>
+        </tr>
+        <tr class="dataType__parameter">
+          <th scope="row">lastName</th>
+          <td></td>
+          <td class="request__parameter-type">String <span class="badge badge--warn">Required</span></td>
+          <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">Williams</span></div></td>
+        </tr>
+        <tr class="dataType__parameter">
+          <th scope="row">birthday</th>
+          <td>Birthday as unix timestamp (in ms)</td>
+          <td class="request__parameter-type">String <span class="badge">Optional</span></td>
+          <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Format</span> <span class="badge">rfc3339</span></div><div class="metadata"><span class="metadata__label">Examples</span> <ul class="example"><li class="badge example__value">173664000000</li><li class="badge example__value">383270400000</li></ul></div></td>
+        </tr>
+        <tr class="dataType__parameter">
+          <th scope="row">active</th>
+          <td></td>
+          <td class="request__parameter-type">Boolean <span class="badge">Optional</span></td>
+          <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Default</span> <span class="badge">true</span></div></td>
+        </tr>
+        <tr class="dataType__parameter">
+          <th scope="row">rank</th>
+          <td></td>
+          <td class="request__parameter-type">Integer <span class="badge">Optional</span></td>
+          <td class="request__parameter-example"><div class="metadata">Format <span class="badge">int32</span></div>
+            <div class="metadata metadata--min"><span class="metadata__label">Minimum</span> <span class="badge">1</span></div>
+            <div class="metadata"><span class="metadata__label">Examples</span> <ul class="example"><li class="badge example__value">1</li><li class="badge example__value">2</li><li class="badge example__value">3</li></ul></div>
+          </td>
+        </tr>
+        <tr class="dataType__parameter">
+          <th scope="row">company</th>
+          <td>This property is a reference to a Company</td>
+          <td class="request__parameter-type">String <span class="badge">Optional</span></td>
+          <td class="request__parameter-example"><div class="metadata"><span class="metadata__label">Examples</span> <span class="badge">0e8c9fb0-ad98-11e6-bf2e-47644ada7c0f</span></div></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+  <footer class="footer">
+    <a href="/" class="footer__term-of-use">Terms of use</a>
+    <span class="footer__licence">© U.S. Cellular 2020. All rights reserved</span>
+  </footer>
+  <script src="js/main.js"></script>
+</body>
+</html>

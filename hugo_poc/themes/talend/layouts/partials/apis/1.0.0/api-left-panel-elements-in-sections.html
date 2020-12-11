@@ -1,0 +1,20 @@
+{{ $itemsByJsonPath := .itemsByJsonPath -}}
+{{ $idsByJsonPath := .idsByJsonPath -}}
+<ul class="api-definition__content">
+  {{ range .elements }}
+    {{ $item := index $itemsByJsonPath . }}
+
+    {{ if (hasPrefix . "#/contract/texts/") }}
+      {{ $id := index $idsByJsonPath . }}
+  <li class="api-definition__item"><a href="#{{ $id }}">{{ $item.Title }}s</a></li>
+    {{ else if (hasPrefix  . "#/contract/resources/") }}
+      {{ range $key,$operation := $item.operations }}
+        {{ $id := index $idsByJsonPath (print "#/contract/operations/" $key ) }}
+  <li class="api-definition__item api-definition__item--request-{{ lower .method }}"><a href="#{{ $id }}">{{ $operation.name }}</a></li>
+      {{ end }}
+    {{ else if (hasPrefix . "#/contract/types/") }}
+      {{ $id := index $idsByJsonPath . }}
+  <li class="api-definition__item api-definition__item--datatype"><a href="#{{ $id }}">{{ $item.name }}</a></li>
+    {{ end }}
+  {{end}}
+</ul>

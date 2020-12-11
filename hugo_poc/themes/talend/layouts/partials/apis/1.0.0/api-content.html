@@ -1,0 +1,69 @@
+{{ $currentPage := .currentPage }}
+{{ $itemsByJsonPath := .itemsByJsonPath -}}
+{{ $idsByJsonPath := .idsByJsonPath -}}
+{{ $apiDefinition := .apiDefinition -}}
+{{ $rwadefResource := .rwadefResource }}
+    <nav class="breadcrumb" aria-label="{{ i18n "apis-breadcrumb" -}}">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="/" class="breadcrumb__element">{{ i18n "apis-breadcrumb-home" -}}</a><span class="breadcrumb__separator" aria-hidden="true"> / </span></li>
+        <li class="breadcrumb__item"><a href="{{$currentPage.Parent.Permalink}}" class="breadcrumb__element">{{ i18n "apis-breadcrumb-api-catalog" -}}</a><span class="breadcrumb__separator" aria-hidden="true"> / </span></li>
+        <li class="breadcrumb__item"><a aria-current="page" href="{{.Permalink}}" class="breadcrumb__element">{{$apiDefinition.info.name}}</a></li>
+      </ol>
+    </nav>
+    <h2 id="top">{{$apiDefinition.info.name}}</h2>
+{{ with $apiDefinition.info.description }}<div class="api-description wysiwyg">{{ $apiDefinition.info.description | markdownify}}</div>{{ end}}
+
+{{ partial "apis/1.0.0/info" (dict "apiDefinition" $apiDefinition) }}
+
+{{ with $apiDefinition.contract.mediaTypes }}
+    <div class="definition">
+      <h3 id="mediatypes">{{ i18n "api-media-type" (len .) -}}</h3>
+      <div>{{ delimit . ", " }}</div>
+    </div>
+{{ end }}
+
+{{ with $apiDefinition.contract.baseUrls }}
+    <div class="definition">
+      <h3 id="endpoints">{{ i18n "api-endpoint" (len .) -}}</h3>
+      <ul class="endpoints">
+        {{ range . }}
+        <li class="endpoint__value">
+          <span class="endpoint__url">{{ .Url }}</span>
+          {{ with .Description }}<div class="endpoint__description">{{ . | markdownify }}</div>{{ end }}
+        </li>
+        {{ end }}
+      </ul>
+    </div>
+{{ end }}
+    <div class="definition">
+      <h3 id="global-security">{{ i18n "api-global-security" -}}</h3>
+      <p class="note">{{ i18n "api-global-security-note" -}}</p>
+      <div>
+        {{ partial "apis/1.0.0/securedBy" (dict "itemsByJsonPath" $itemsByJsonPath "idsByJsonPath" $idsByJsonPath "securedBy" $apiDefinition.contract.securedBy "context" "global-security") }}
+      </div>
+    </div>
+{{ with $apiDefinition.contract.securitySchemes }}
+    <section class="definition" aria-labelledby="securitySchemes">
+      <h3 id="securityschemes">{{ i18n "api-security-scheme" (len .) -}}</h3>
+      <p class="note">{{ i18n "api-security-scheme-note" (len .) -}}</p>
+  {{ range $key,$securityScheme := . }}
+    {{ partial "apis/1.0.0/securityScheme" (dict "itemsByJsonPath" $itemsByJsonPath "idsByJsonPath" $idsByJsonPath "apiDefinition" $apiDefinition "securityScheme" $securityScheme "securitySchemeKey" $key) }}
+  {{ end }}
+    </section>
+{{ end }}
+
+  {{/* Display the unsorted resources at the top of the page */}}
+  {{ range $apiDefinition.Contract.unsortedElementOrder }}
+    {{- partial "apis/1.0.0/api-content-element-in-section" (dict "itemsByJsonPath" $itemsByJsonPath "idsByJsonPath" $idsByJsonPath "currentPage" $currentPage "apiDefinition" $apiDefinition "rwadefResource" $rwadefResource "jsonPath" .)  -}}
+  {{ end }}
+
+  {{ range $key,$section := $apiDefinition.Contract.Sections }}
+    {{ $idSection := index $idsByJsonPath (print "#/contract/sections/" $key ) -}} 
+    <hr class="separator"/> {{/* TODO ne pas afficher le premier? */}}
+    <section aria-labelledby="{{.name}}">
+      <h2 id="{{ $idSection }}">{{$section.name}}</h2>
+    {{ range $section.elementOrder }}
+      {{- partial "apis/1.0.0/api-content-element-in-section" (dict "itemsByJsonPath" $itemsByJsonPath "idsByJsonPath" $idsByJsonPath "currentPage" $currentPage "apiDefinition" $apiDefinition "rwadefResource" $rwadefResource "jsonPath" .)  -}}
+    {{end}}
+    </section>
+  {{ end }}

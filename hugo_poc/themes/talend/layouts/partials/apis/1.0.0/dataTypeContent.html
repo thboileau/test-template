@@ -1,0 +1,92 @@
+{{ $itemsByJsonPath := .itemsByJsonPath -}}
+{{ $idsByJsonPath := .idsByJsonPath -}}
+{{ $apiDefinition := .apiDefinition -}}
+{{ $dataType := .dataType -}}
+
+{{ if (hasPrefix $dataType.type "#/contract/types/") -}}
+	{{ partial "apis/1.0.0/dataTypeReference" (dict "itemsByJsonPath" $itemsByJsonPath "idsByJsonPath" $idsByJsonPath "apiDefinition" $apiDefinition "dataTypeReference" $dataType.type ) -}}
+{{ else if (hasPrefix $dataType.type "#/components/") -}}
+	{{ $component := index $itemsByJsonPath $dataType.type -}}
+	{{ partial "apis/1.0.0/dataTypeContent" (dict "itemsByJsonPath" $itemsByJsonPath "idsByJsonPath" $idsByJsonPath "apiDefinition" $apiDefinition "dataType" $component ) -}}
+{{ else if (eq $dataType.type "ARRAY") -}}
+	array of {{ partial "apis/1.0.0/dataTypeContent" (dict "itemsByJsonPath" $itemsByJsonPath "idsByJsonPath" $idsByJsonPath "apiDefinition" $apiDefinition "dataType" $dataType.items ) -}}
+{{ else if (eq $dataType.type "ALLOF") -}}
+	all of
+	{{ with $dataType.allOf -}}
+		{{ range . -}}
+			{{ partial "apis/1.0.0/dataTypeReference" (dict "itemsByJsonPath" $itemsByJsonPath "idsByJsonPath" $idsByJsonPath "apiDefinition" $apiDefinition "dataTypeReference" . ) -}}
+		{{ end -}}
+	{{ end -}}
+{{ else if (eq $dataType.type "ANYOF") -}}
+	any of
+	{{ with $dataType.anyOf -}}
+		{{ range . -}}
+			{{ partial "apis/1.0.0/dataTypeReference" (dict "itemsByJsonPath" $itemsByJsonPath "idsByJsonPath" $idsByJsonPath "apiDefinition" $apiDefinition "dataTypeReference" . ) -}}
+		{{ end -}}
+	{{ end -}}
+{{ else if (eq $dataType.type "ONEOF") -}}
+	one of
+	{{ with $dataType.oneOf -}}
+		{{ range . -}}
+			{{ partial "apis/1.0.0/dataTypeReference" (dict "itemsByJsonPath" $itemsByJsonPath "idsByJsonPath" $idsByJsonPath "apiDefinition" $apiDefinition "dataTypeReference" . ) -}}
+		{{ end -}}
+	{{ end -}}
+{{ else if (eq $dataType.type "OBJECT") -}}
+	Object
+{{ else -}}
+	{{ $dataType.type -}}
+{{ end -}}
+
+{{ with $dataType.properties -}}
+    <table>
+		<caption class="dataType-title sr-only">{{ i18n "api-data-type-details" -}}</caption>
+		<thead class="sr-only">
+			<tr>
+				<th scope="col">{{ i18n "api-parameter-name" -}}</th>
+				<th scope="col">{{ i18n "api-parameter-description" -}}</th>
+				<th scope="col">{{ i18n "api-parameter-type" -}}</th>
+				<th scope="col">{{ i18n "api-parameter-examples" -}}</th>
+			</tr>
+		</thead>
+		<tbody>
+	{{ range . -}}
+			<tr class="dataType__parameter">
+				<th scope="row">{{ .name }}</th>
+				<td>{{ .description }}</td>
+				<td class="dataType__parameter-type">{{ partial "apis/1.0.0/dataTypeContent" (dict "itemsByJsonPath" $itemsByJsonPath "idsByJsonPath" $idsByJsonPath "apiDefinition" $apiDefinition "dataType" . ) -}}{{ if .required }}<span class="badge badge--warn">Required</span>{{else}}<span class="badge">Optional</span>{{ end }}</td>
+				<td class="dataType__parameter-example">
+		{{ with .uniqueItems }}<div class="metadata"><span class="metadata__label">Unique items</span> <span class="badge">{{ . }}</span></div>{{ end -}}
+		{{ with .minItems }}<div class="metadata"><span class="metadata__label">Min items</span> <span class="badge">{{ . }}</span></div>{{ end -}}
+		{{ with .maxItems }}<div class="metadata"><span class="metadata__label">Max items</span> <span class="badge">{{ . }}</span></div>{{ end -}}
+		{{ with .default }}<div class="metadata"><span class="metadata__label">Default</span> <span class="badge">{{ . }}</span></div>{{ end -}}
+		{{ with .minimum }}<div class="metadata"><span class="metadata__label">Minimum</span> <span class="badge">{{ . }}</span></div>{{ end -}}
+		{{ with .maximum }}<div class="metadata"><span class="metadata__label">Maximum</span> <span class="badge">{{ . }}</span></div>{{ end -}}
+		{{ with .format }}<div class="metadata"><span class="metadata__label">Format</span><span class="badge">{{ . }}</span></div>{{ end -}}
+		{{ with .enum }}<div class="metadata"><span class="metadata__label">Enum</span><ul class="enum">{{ range . }}<li class="badge enum__value">{{ . }}</li>{{ end }}</ul></div>{{ end -}}
+		{{ with .pattern }}<div class="metadata"><span class="metadata__label">Pattern</span> <span class="badge">{{ . }}</span></div>{{ end -}}
+		{{ with .fileTypes }}<div class="metadata"><span class="metadata__label">File types</span>{{ range . }}<span class="badge">{{ . }}</span>{{ end }}</div>{{ end -}}
+		{{ with .minLength }}<div class="metadata"><span class="metadata__label">Min length</span> <span class="badge">{{ . }}</span></div>{{ end -}}
+		{{ with .maxLength }}<div class="metadata"><span class="metadata__label">Max length</span> <span class="badge">{{ . }}</span></div>{{ end }}
+		{{ with .restriction }}<div class="metadata"><span class="metadata__label">Restriction</span>{{ if eq . "READ_ONLY" }} <span class="badge">Available in response only</span>{{ else if eq . "WRITE_ONLY" }}Available in request only{{ end }}</div>{{ end -}}
+				</td>
+			</tr>
+	{{ end -}}
+      </tbody>
+    </table>
+{{ end -}}
+{{/*
+		{{ with $dataType.uniqueItems }}<div class="metadata"><span class="metadata__label">Unique items</span> <span class="badge">{{ . }}</span></div>{{ end -}}
+		{{ with $dataType.minItems }}<div class="metadata"><span class="metadata__label">Min items</span> <span class="badge">{{ . }}</span></div>{{ end -}}
+		{{ with $dataType.maxItems }}<div class="metadata"><span class="metadata__label">Max items</span> <span class="badge">{{ . }}</span></div>{{ end -}}
+		{{ with $dataType.default }}<div class="metadata"><span class="metadata__label">Default</span> <span class="badge">{{ . }}</span></div>{{ end -}}
+		{{ with $dataType.minimum }}<div class="metadata"><span class="metadata__label">Minimum</span> <span class="badge">{{ . }}</span></div>{{ end -}}
+		{{ with $dataType.maximum }}<div class="metadata"><span class="metadata__label">Maximum</span> <span class="badge">{{ . }}</span></div>{{ end -}}
+		{{ with $dataType.format }}<div class="metadata"><span class="metadata__label">Format</span><span class="badge">{{ . }}</span></div>{{ end -}}
+		{{ with $dataType.enum }}<div class="metadata"><span class="metadata__label">Enum</span><ul class="enum">{{ range . }}<li class="badge enum__value">{{ . }}</li>{{ end }}</ul></div>{{ end -}}
+		{{ with $dataType.pattern }}<div class="metadata"><span class="metadata__label">Pattern</span> <span class="badge">{{ . }}</span></div>{{ end -}}
+		{{ with $dataType.fileTypes }}<div class="metadata"><span class="metadata__label">File types</span>{{ range . }}<span class="badge">{{ . }}</span>{{ end }}</div>{{ end -}}
+		{{ with $dataType.minLength }}<div class="metadata"><span class="metadata__label">Min length</span> <span class="badge">{{ . }}</span></div>{{ end -}}
+		{{ with $dataType.maxLength }}<div class="metadata"><span class="metadata__label">Max length</span> <span class="badge">{{ . }}</span></div>{{ end }}
+		{{ with $dataType.restriction }}<div class="metadata"><span class="metadata__label">Restriction</span>{{ if eq . "READ_ONLY" }} <span class="badge">Available in response only</span>{{ else if eq . "WRITE_ONLY" }}Available in request only{{ end }}</div>{{ end -}}
+
+*/}}

@@ -1,0 +1,17 @@
+{{ $itemsByJsonPath := .itemsByJsonPath -}}
+{{ $idsByJsonPath := .idsByJsonPath -}}
+{{ $apiDefinition := .apiDefinition -}}
+{{ $jsonPath := .jsonPath -}}
+{{ $rwadefResource := .rwadefResource }}
+
+{{ $item := index $itemsByJsonPath $jsonPath -}}
+
+{{ if (hasPrefix $jsonPath "#/contract/texts/") -}}
+	{{ $id := index $idsByJsonPath $jsonPath -}}
+    {{ partial "apis/1.0.0/text" (dict "apiDefinition" $apiDefinition "text" $item "id" $id) -}}
+{{ else if (hasPrefix $jsonPath "#/contract/resources/") -}}
+    {{ partial "apis/1.0.0/resource" (dict "itemsByJsonPath" $itemsByJsonPath "idsByJsonPath" $idsByJsonPath "apiDefinition" $apiDefinition "rwadefResource" $rwadefResource "resource" $item) -}}
+{{ else if (hasPrefix $jsonPath "#/contract/types/") -}}
+	{{ $id := index $idsByJsonPath $jsonPath -}}
+    {{ partial "apis/1.0.0/dataType" (dict "itemsByJsonPath" $itemsByJsonPath "idsByJsonPath" $idsByJsonPath "apiDefinition" $apiDefinition "dataType" $item "id" $id) -}}
+{{ end -}}

@@ -1,0 +1,64 @@
+{{ $apiDefinition := .apiDefinition -}} 
+{{ $resources := .resources -}} 
+{{ $itemsByJsonPath := .itemsByJsonPath -}}
+{{ $idsByJsonPath := .idsByJsonPath -}}
+{{ $siblingsApiDefinitionsPages := .siblingsApiDefinitionsPages -}}
+{{ $rwadefResource := .rwadefResource -}}
+
+<div class="left-panel__wrapper">
+    <div class="api__general">
+      <h1>{{ .apiDefinition.info.name -}} </h1>
+      <div class="dropdown api__version">
+{{- $onlyOneVersion := eq (len $siblingsApiDefinitionsPages) 1 -}}
+{{ if $onlyOneVersion -}} 
+        <a href="#" class="btn btn__version">{{ $apiDefinition.info.version -}} </a>
+{{ else -}} 
+        <button type="button" class="btn btn__version  js-dropdown" aria-controls="versions" aria-haspopup="true" aria-expanded="false">{{ $apiDefinition.info.version -}} 
+          <svg viewBox="0 0 16 16" aria-hidden="true" class="dropdown__icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg>
+        </button>
+        <div id="versions" role="menu" class="dropdown__content" hidden>
+  {{ range $siblingsApiDefinitionsPages -}} 
+    {{- $apiVersionPageApiDefinition := index .Params "api-definition" -}}
+    {{- $isCurrentVersion := eq $apiVersionPageApiDefinition.info.version $apiDefinition.info.version -}}
+          <a href="{{ .Permalink -}}" role="menuitem" class="dropdown__item{{ if $isCurrentVersion }} dropdown__item--selected{{ end }}"{{ if $isCurrentVersion }} aria-current="page"{{ end }} tabindex="-1">{{ $apiVersionPageApiDefinition.info.version }} </a>
+  {{ end -}} 
+        </div>
+{{ end -}} 
+      </div>
+    </div>
+    <div class="api__action">
+      {{ partial "apis/1.0.0/try_in_tester" $rwadefResource -}}
+      {{ partial "apis/download" $resources -}}
+    </div>
+
+    <form class="search-form">
+      <label class="search-form__label" for="filter">
+        <svg class="search-form__icon" aria-hidden="true" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+          <path d="M7.5 14C3.9 14 1 11.1 1 7.5S3.9 1 7.5 1 14 3.9 14 7.5 11.1 14 7.5 14zm0-11C5 3 3 5 3 7.5S5 12 7.5 12 12 10 12 7.5 10 3 7.5 3zm6 9c-.4.6-.9 1.1-1.5 1.5l2.5 2.5 1.5-1.5-2.5-2.5z"></path>
+        </svg> <span class="sr-only">{{ i18n "api-left-panel-filter" -}}</span>
+      </label>
+      <input class="search-form__field js-filter" id="filter" type="search" placeholder="{{ i18n "api-left-panel-filter" -}}" />
+    </form>
+
+    <hr />
+
+    <nav aria-label="{{ i18n "api-left-panel-api-content" -}}">
+      <ul class="api-definition js-api-definition">
+{{ with $apiDefinition.Contract.unsortedElementOrder -}} 
+        <li>
+  {{ partial "apis/1.0.0/api-left-panel-elements-in-sections" (dict "itemsByJsonPath" $itemsByJsonPath "idsByJsonPath" $idsByJsonPath "elements" .) -}} 
+        </li>
+{{ end -}} 
+
+{{ range $key,$section := $apiDefinition.Contract.Sections -}} 
+  {{ $idSection := index $idsByJsonPath (print "#/contract/sections/" $key ) -}} 
+        <li>
+          <details open>
+            <summary class="api-definition__section-title"><a href="#{{ $idSection -}} ">{{$section.name}}</a></summary>
+  {{ partial "apis/1.0.0/api-left-panel-elements-in-sections" (dict "itemsByJsonPath" $itemsByJsonPath "idsByJsonPath" $idsByJsonPath "elements" $section.elementOrder) -}} 
+          </details>
+        </li>
+{{ end -}} 
+      </ul>
+    </nav>
+</div>

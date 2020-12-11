@@ -1,0 +1,16 @@
+{{ $itemsByJsonPath := .itemsByJsonPath -}}
+{{ $idsByJsonPath := .idsByJsonPath -}}
+{{ $apiDefinition := .apiDefinition }}
+{{ $status := default .response.status .status }}
+
+{{ with .response }}
+<div class="response">
+	<details class="response__detail">
+		<summary class="response__type"><span class="response__type--content"><span class="badge badge--{{substr $status 0 1}}xx">{{ $status }}</span>{{ i18n "api-status" $status }}</span><svg viewBox="0 0 16 16" aria-hidden="true" class="response__type--icon"><path d="M8 13.6l-8-8L2.6 3 8 8.4 13.4 3 16 5.6z"></path></svg></summary>
+			{{ with .description }}<div class="api-description wysiwyg">{{ . | markdownify }}</div>{{ end }}
+		{{ partial "apis/1.0.0/pathvariables_queryparameters_headers" (dict "itemsByJsonPath" $itemsByJsonPath "idsByJsonPath" $idsByJsonPath "apiDefinition" $apiDefinition "context" "response" "type" "parameters" "label" "Query Parameters" "params" .queryParameters) }}
+		{{ partial "apis/1.0.0/pathvariables_queryparameters_headers" (dict "itemsByJsonPath" $itemsByJsonPath "idsByJsonPath" $idsByJsonPath "apiDefinition" $apiDefinition "context" "response" "type" "parameters" "label" "Headers" "params" .headers) }}
+		{{ partial "apis/1.0.0/bodies" (dict "itemsByJsonPath" $itemsByJsonPath "idsByJsonPath" $idsByJsonPath "apiDefinition" $apiDefinition "bodies" .bodies "context" "response" "responseStatus"  $status ) }}    
+	</details>				
+</div>
+{{ end }}

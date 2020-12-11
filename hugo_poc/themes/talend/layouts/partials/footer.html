@@ -1,0 +1,4 @@
+{{ range .Site.Menus.footer.ByWeight }}
+	<a href="{{ .URL }}" class="footer__term-of-use">{{ .Name }}</a>
+{{ end }}
+	{{ with .Site.Params.Copyright.Label }}<span class="footer__license">{{ . }}</span>{{ end }}
