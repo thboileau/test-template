@@ -1,0 +1,13 @@
+{{ with .minItems -}}<div class="metadata metadata--min"><span class="metadata__label">{{ i18n "api-type-parameter-min-items" -}}</span> <span class="badge">{{ . -}}</span></div>{{ end -}}
+{{ with .maxItems -}}<div class="metadata metadata--max"><span class="metadata__label">{{ i18n "api-type-parameter-max-items" -}}</span> <span class="badge">{{ . -}}</span></div>{{ end -}}
+{{ with .uniqueItems -}}<div class="metadata"><span class="metadata__label">{{ i18n "api-type-parameter-unique-items" -}}</span> <span class="badge">{{ . -}}</span></div>{{ end -}}
+{{ with .default -}}<div class="metadata"><span class="metadata__label">{{ i18n "api-type-parameter-default" -}}</span> <span class="badge">{{ . -}}</span></div>{{ end -}}
+{{ with .minimum -}}<div class="metadata  metadata--min"><span class="metadata__label">{{ i18n "api-type-parameter-minimum" -}}</span> <span class="badge">{{ . -}}</span></div>{{ end -}}
+{{ with .maximum -}}<div class="metadata metadata--max"><span class="metadata__label">{{ i18n "api-type-parameter-maximum" -}}</span> <span class="badge">{{ . -}}</span></div>{{ end -}}
+{{ with .format -}}<div class="metadata"><span class="metadata__label">{{ i18n "api-type-parameter-format" -}}</span><span class="badge">{{ . -}}</span></div>{{ end -}}
+{{ with .enum -}}<div class="metadata"><span class="metadata__label">{{ i18n "api-type-parameter-enum" -}}</span><ul class="enum">{{ range . -}}<li class="badge enum__value">{{ . -}}</li>{{ end -}}</ul></div>{{ end -}}
+{{ with .pattern -}}<div class="metadata"><span class="metadata__label">{{ i18n "api-type-parameter-pattern" -}}</span> <span class="badge">{{ . -}}</span></div>{{ end -}}
+{{ with .fileTypes -}}<div class="metadata"><span class="metadata__label">{{ i18n "api-type-parameter-file-types" -}}</span>{{ range . -}}<span class="badge">{{ . -}}</span>{{ end -}}</div>{{ end -}}
+{{ with .minLength -}}<div class="metadata"><span class="metadata__label">{{ i18n "api-type-parameter-min-length" -}}</span> <span class="badge">{{ . -}}</span></div>{{ end -}}
+{{ with .maxLength -}}<div class="metadata"><span class="metadata__label">{{ i18n "api-type-parameter-max-length" -}}</span> <span class="badge">{{ . -}}</span></div>{{ end -}}
+{{ with .restriction -}}<div class="metadata"><span class="metadata__label">{{ i18n "api-type-parameter-restriction" -}}</span>{{ if eq . "READ_ONLY" -}} <span class="badge">{{ i18n "api-type-parameter-restriction-response-only" -}}</span>{{ else if eq . "WRITE_ONLY" -}}{{ i18n "api-type-parameter-restriction-request-only" -}}{{ end -}}</div>{{ end -}}

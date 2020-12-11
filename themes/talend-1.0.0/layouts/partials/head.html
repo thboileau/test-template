@@ -1,0 +1,31 @@
+{{/*
+  Copyright (C) 2010-2020 Talend Inc. - www.talend.com
+
+  This source code is available under agreement available at
+  https://github.com/Talend/api-portal-template/blob/main/LICENSE.md
+
+  You should have received a copy of the agreement
+  along with this program; if not, write to Talend SA
+  9 rue Pages 92150 Suresnes, France
+*/}}
+
+<meta charset="utf-8">
+{{ with .Title -}}<title>{{ . }}</title>{{ end -}}
+{{ with .Description -}}<meta name="description" content="{{ . }}">{{ end -}}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{{ with .Title -}}<meta property="og:title" content="{{ . }}">{{ end -}}
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ .Permalink }}">
+{{ with resources.Get "img/opengraph-logo.svg" -}}<meta property="og:image" content="{{ (fingerprint .).Permalink }}">{{ end }}
+
+<link rel="manifest" href="site.webmanifest">
+<link rel="icon" type="image/svg+xml" href="/img/brand-logo.svg">
+<link rel="apple-touch-icon" href="/img/brand-logo.svg">
+<link rel="alternate icon" href="/favicon.ico">
+
+{{- $CSS :=  resources.Match "css/*.css" | resources.Concat "css/full.css" | minify | fingerprint }}
+
+<link rel="stylesheet" href="{{ $CSS.RelPermalink }}" media="all">
+
+<meta name="theme-color" content="#fafafa">

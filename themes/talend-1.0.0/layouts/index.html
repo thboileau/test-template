@@ -1,0 +1,28 @@
+{{/*
+  Copyright (C) 2010-2020 Talend Inc. - www.talend.com
+
+  This source code is available under agreement available at
+  https://github.com/Talend/api-portal-template/blob/main/LICENSE.md
+
+  You should have received a copy of the agreement
+  along with this program; if not, write to Talend SA
+  9 rue Pages 92150 Suresnes, France
+*/}}
+
+<!doctype html>
+<html lang="{{ .Site.Language.Lang }}">
+	<head>
+{{ partial "head" . -}}
+	</head>
+	<body class="container home">
+		<header class="header">
+{{ partial "header" . -}}
+		</header>
+		<main id="content">
+{{ with .Site.GetPage "/apis/" -}}{{- partial "apis/1.0.0/apisList/content" . -}}{{ end -}}
+		</main>
+		<footer class="footer">
+{{ partial "footer" . -}}
+		</footer>
+	</body>
+</html>

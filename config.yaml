@@ -1,0 +1,37 @@
+#    Copyright (C) 2010-2020 Talend Inc. - www.talend.com
+#
+#   This source code is available under agreement available at
+#  https://github.com/Talend/api-portal-template/blob/main/LICENSE.md
+#
+#   You should have received a copy of the agreement
+#  along with this program; if not, write to Talend SA
+# 9 rue Pages 92150 Suresnes, France
+
+DefaultContentLanguage: en
+theme: "talend-1.0.0"
+relativeURLs: true
+
+languages:
+  en:
+    title: "API portal"
+    weight: 1
+
+module:
+  mounts:
+  - source: apis
+    target: content/apis
+  - source: content
+    target: content
+  - source: static
+    target: static
+  - source: layouts
+    target: layouts
+  - source: data
+    target: data
+  - source: assets
+    target: assets
+  - source: i18n
+    target: i18n
+  - source: archetypes
+    target: archetypes
+

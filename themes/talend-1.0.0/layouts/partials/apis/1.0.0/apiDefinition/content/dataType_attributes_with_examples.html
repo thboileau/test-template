@@ -1,0 +1,15 @@
+{{ partial "apis/1.0.0/apiDefinition/content/dataType_attributes" . -}}
+{{ with .examples -}}
+<div class="metadata">
+  <span class="metadata__label">{{ i18n "api-parameter-examples" (len .) -}}</span>
+  {{ if eq (len .) 1 -}}
+  <span class="badge">{{ range . -}}{{ .value -}}{{end -}}</span>
+  {{ else -}}
+  <ul class="example">
+    {{ range . -}}
+    <li class="example__value badge">{{.value -}}</li>
+    {{ end -}}
+  </ul>
+  {{ end -}}
+</div>
+{{ end -}}

@@ -1,0 +1,134 @@
+{{/*
+  Copyright (C) 2010-2020 Talend Inc. - www.talend.com
+
+  This source code is available under agreement available at
+  https://github.com/Talend/api-portal-template/blob/main/LICENSE.md
+
+  You should have received a copy of the agreement
+  along with this program; if not, write to Talend SA
+  9 rue Pages 92150 Suresnes, France
+*/}}
+
+{{ $itemsByJsonPath := .itemsByJsonPath -}}
+{{ $idsByJsonPath := .idsByJsonPath -}}
+{{ $apiDefinition := .apiDefinition -}}
+{{ $context := .context -}}
+{{ $type := .type -}}
+{{ $typedParameter := .typedParameter -}}
+
+{{ $randomId := delimit (shuffle (split (md5 "aria-describedBy for Array property") "" )) "" -}}
+{{ $arraysAndFinalTypes := partial "partials/apis/inline/functions/getListOfArrayTypesAndFinalTypeAsScratch" (dict "itemsByJsonPath" $itemsByJsonPath "dataType" $typedParameter) -}}
+{{ $arrayTypes := $arraysAndFinalTypes.Get "arrays" -}}
+{{ $finalType := $arraysAndFinalTypes.Get "finalType" -}}
+<tr class="{{ $context}}__parameter array-parameter array-parameter--main">
+  <th scope="row" aria-describedby="{{ $randomId }}">{{ $typedParameter.name -}}</th>
+  <td class="wysiwyg">{{ replace $typedParameter.description "# " "#### " | markdownify -}}</td>
+  <td class="{{ $context}}__parameter-type">
+ {{ range $arrayTypes }}<span class="{{ $context}}__parameter-type_label">{{ i18n "api-type-array-of" -}}</span>{{ end -}}
+ {{ with $finalType -}}
+    <span class="{{ $context}}__parameter-type_label">
+    {{ if (eq .type "OBJECT") -}}
+      {{ i18n "api-type-object" -}}
+    {{ else -}}
+      {{ partial "apis/1.0.0/apiDefinition/content/dataType_simple" (dict "itemsByJsonPath" $itemsByJsonPath "idsByJsonPath" $idsByJsonPath "apiDefinition" $apiDefinition "dataType" . ) -}}
+    {{ end -}}
+  </span>
+ {{ end -}}
+ {{ if $typedParameter.required -}}<span class="badge badge--warn">{{ i18n "api-parameter-required" -}}</span>{{else -}}<span class="badge">{{ i18n "api-parameter-optional" -}}</span>{{ end -}}</td>
+  <td class="{{ $context}}__parameter-example"></td>
+</tr>
+<tr class="array-parameter--container array-parameter">
+  <td colspan="4" class="array-parameter--subtype">
+    <table id="{{ $randomId -}}">
+      <caption class="{{ $context}}-title sr-only">{{ i18n "api-data-type-details" -}}</caption>
+      <thead class="sr-only">
+        <tr>
+          <th scope="col">{{ i18n "api-parameter-name" -}}</th>
+          <th scope="col">{{ i18n "api-parameter-description" -}}</th>
+          <th scope="col">{{ i18n "api-parameter-type" -}}</th>
+          <th scope="col">{{ i18n "api-parameter-examples" -}}</th>
+        </tr>
+      </thead>
+      <tbody>
+{{ range $arrayTypes -}}
+        <tr class="{{ $context}}__parameter array-parameter--description">
+          <th scope="row">{{ i18n "api-type-array" -}}</th>
+          <td>{{ replace .description "# " "#### " | markdownify -}}</td>
+          <td class="request__parameter-type"></td>
+          <td class="request__parameter-example">{{ partial "apis/1.0.0/apiDefinition/content/dataType_attributes_with_examples" . -}}</td>
+        </tr>
+{{ end -}}
+{{ with $finalType -}}
+  {{ if (eq .type "OBJECT") -}}
+    {{ $randomId := delimit (shuffle (split (md5 "aria-describedBy for Object property in array") "" )) "" -}}
+        <tr class="{{ $context}}__parameter array-parameter--description">
+          <th scope="row" aria-describedby="{{ $randomId }}">{{ i18n "api-type-object" -}}</th>
+          <td>{{ replace .description "# " "#### " | markdownify -}}</td>
+          <td class="request__parameter-type"></td>
+          <td class="request__parameter-example">{{ partial "apis/1.0.0/apiDefinition/content/dataType_attributes_with_examples" . -}}</td>
+        </tr>
+        <tr class="{{ $context}}__parameter--subtype">
+          <td colspan="4">
+        {{ partial "apis/1.0.0/apiDefinition/content/typed_parameters" (dict "itemsByJsonPath" $itemsByJsonPath "idsByJsonPath" $idsByJsonPath "apiDefinition" $apiDefinition "context" $context "type" $type "parameters" $typedParameter.properties "id" $randomId) -}}
+          </td>
+        </tr>
+  {{ else -}}
+        <tr class="{{ $context}}__parameter array-parameter--description">
+          <th scope="row">
+    {{ if (hasPrefix .type "#/contract/types/") -}}
+      {{ $type := index $itemsByJsonPath .type -}}
+      {{$type.name -}}
+    {{ else if (eq .type "ALLOF") -}}
+      {{ i18n "api-type-all-of" -}}
+    {{ else if (eq .type "ANYOF") -}}
+      {{ i18n "api-type-any-of" -}}
+    {{ else if (eq .type "ONEOF") -}}
+      {{ i18n "api-type-one-of" -}}
+    {{ else -}}
+      {{ .type | lower -}}
+    {{ end -}}
+          </th>
+          <td>{{ replace .description "# " "#### " | markdownify -}}</td>
+          <td class="request__parameter-type"></td>
+          <td class="request__parameter-example">{{ partial "apis/1.0.0/apiDefinition/content/dataType_attributes_with_examples" . -}}</td>
+        </tr>
+  {{ end -}}
+{{ end -}}
+      </tbody>
+    </table>
+  </td>
+</tr>
+
+{{ define "partials/apis/inline/functions/getListOfArrayTypesAndFinalTypeAsScratch" -}}
+  {{ $itemsByJsonPath := .itemsByJsonPath -}}
+  {{ $firstArrayOfType := .dataType -}}
+
+  {{ $listOfTypes := partial "partials/apis/inline/functions/recursiveArrayTypesAsListOfTypes" (dict "itemsByJsonPath" $itemsByJsonPath "dataType" $firstArrayOfType.items "listOfTypes" (slice $firstArrayOfType)) -}}
+  {{ $lenTypes := len $listOfTypes -}}
+
+  {{ $scratch := newScratch -}}
+  {{ if eq $lenTypes 1 -}}
+    {{ $scratch.Add "arrays" $listOfTypes -}}
+    {{/* missing final type... */}}
+  {{ else -}}
+    {{ $scratch.Add "arrays" (first (sub $lenTypes 1) $listOfTypes) -}}
+    {{ $scratch.Add "finalType" (index $listOfTypes (sub $lenTypes 1)) -}}
+  {{ end -}}  
+
+  {{ return $scratch -}}
+{{ end -}}
+
+{{ define "partials/apis/inline/functions/recursiveArrayTypesAsListOfTypes" -}}
+  {{ $itemsByJsonPath := .itemsByJsonPath -}}
+  {{ $dataType := .dataType -}}
+  {{ $listOfTypes := .listOfTypes -}}
+
+  {{ with cond (hasPrefix $dataType.type "#/components/") (index $itemsByJsonPath $dataType.type) $dataType -}}
+    {{ $listOfTypes = $listOfTypes | append . }}
+    {{ if (eq $dataType.type "ARRAY") -}}
+      {{ $listOfTypes = partial "partials/apis/inline/functions/recursiveArrayTypesAsListOfTypes" (dict "itemsByJsonPath" $itemsByJsonPath "dataType" .items "listOfTypes" $listOfTypes) -}}
+    {{ end -}}
+  {{ end -}}
+
+  {{ return $listOfTypes -}}
+{{ end -}}

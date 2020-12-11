@@ -1,0 +1,11 @@
+<!--
+  ~ Copyright (C) 2010-2020 Talend Inc. - www.talend.com
+
+  ~ This source code is available under agreement available at
+  ~ https://github.com/Talend/api-portal-template/blob/main/LICENSE.md
+
+  ~ You should have received a copy of the agreement
+  ~ along with this program; if not, write to Talend SA
+  ~ 9 rue Pages 92150 Suresnes, France
+ -->
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path class="talend_svg__ti-background" fill="#FF6E70" d="M16 8A8 8 0 110 8a8 8 0 0116 0"></path><path class="talend_svg__ti-foreground" fill="#FFF" d="M10.178 11.432a.789.789 0 00-.113-.216c-.049-.066-.086-.093-.113-.08a3.293 3.293 0 01-.55.213c-.2.057-.373.086-.519.086-.164 0-.289-.037-.375-.11-.086-.072-.148-.208-.186-.405a4.86 4.86 0 01-.057-.86V6.243h1.428c.049 0 .094-.047.137-.14a.833.833 0 00.062-.345.27.27 0 00-.043-.153.148.148 0 00-.116-.073H8.265V3.68c0-.077-.05-.131-.14-.168-.167-.052-.264.129-.264.129a3.893 3.893 0 01-2.408 2.168s-.221.053-.164.285c.006.02.012.04.022.06.03.064.068.098.113.103h.71v4.396c0 .624.19 1.06.568 1.308.378.247.886.37 1.524.37.2 0 .43-.036.694-.111.263-.076.51-.172.743-.29.233-.116.404-.235.515-.355.027-.017.027-.065 0-.142"></path></svg>

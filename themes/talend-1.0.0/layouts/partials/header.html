@@ -1,0 +1,23 @@
+{{/*
+  Copyright (C) 2010-2020 Talend Inc. - www.talend.com
+
+  This source code is available under agreement available at
+  https://github.com/Talend/api-portal-template/blob/main/LICENSE.md
+
+  You should have received a copy of the agreement
+  along with this program; if not, write to Talend SA
+  9 rue Pages 92150 Suresnes, France
+*/}}
+{{ $currentPage := . -}}
+<ul class="header__menu">
+  <li class="header__item ">
+    <a class="header__link header__brand" href="{{ .Site.Home.Permalink }}" aria-current="page">
+      <span class="sr-only">{{ i18n "apis-breadcrumb-home" -}}</span>
+    </a>
+  </li>
+{{ range .Site.Menus.main.ByWeight -}}
+  <li class="header__item">
+    <a href="{{ default .Page.Permalink .URL }}" class="header__link{{ if eq $currentPage.Type .Page.Type }} active{{ end }}">{{ default .Page.Title .Name -}}</a>
+  </li>
+{{ end -}}
+</ul>
