@@ -29,7 +29,7 @@
 - id: "content-not-expected"
   translation: "This is not the expected content"
 - id: "api-list"
-  translation: "APIs list"
+  translation: "API list"
 - id: "download-title"
   translation: "Download"
 - id: "download-title-with-parameter"
