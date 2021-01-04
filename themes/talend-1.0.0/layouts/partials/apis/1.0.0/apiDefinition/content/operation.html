@@ -57,6 +57,7 @@
 
 		{{ $defaultResponseHasBeenFound := false -}}
 		{{ range $scratch.Get "responsesByStatus" -}}
+			STATUS {{ .status }} STATUS
 			{{ $response := cond (isset . "reference") (index $itemsByJsonPath "reference") . -}}{{/* Solve potential referenced component */}}
 			{{ if $defaultResponseHasBeenFound -}}
 				{{ partial "apis/1.0.0/apiDefinition/content/response" (dict "itemsByJsonPath" $itemsByJsonPath "idsByJsonPath" $idsByJsonPath "apiDefinition" $apiDefinition "response" $response "status" .status "isDefaultResponse" false) -}}
