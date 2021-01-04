@@ -12,7 +12,9 @@
 {{ $itemsByJsonPath := .itemsByJsonPath -}}
 {{ $idsByJsonPath := .idsByJsonPath -}}
 {{ $apiDefinition := .apiDefinition -}}
+1STATUT{{ .status -}}1STATUT
 {{ $status := .status -}}
+2STATUT{{ $status -}}2STATUT
 {{ $isDefaultResponse := .isDefaultResponse -}}
 
 {{ with .response -}}
