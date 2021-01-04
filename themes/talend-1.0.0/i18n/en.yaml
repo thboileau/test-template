@@ -111,7 +111,7 @@
 - id: "api-body"
   translation: "Body"
 - id: "api-status"
-  translation: "Status {{.}}"
+  translation: "Status {{ . }}"
 - id: "api-item-details"
   translation: "{{ . }} details"
 - id: "api-data-type-details"
