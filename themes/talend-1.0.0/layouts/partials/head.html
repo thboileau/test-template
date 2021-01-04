@@ -14,6 +14,7 @@
 	Create a "/static/img/brand-logo.svg" file in the Hugo project (not in the theme) in order to specify your own favicon.
 */}}
 <meta charset="utf-8">
+{{ .Hugo.Generator -}}
 {{ with .Title -}}<title>{{ . }}</title>{{ end -}}
 {{ with .Description -}}<meta name="description" content="{{ . }}" />{{ end -}}
 <meta name="viewport" content="width=device-width, initial-scale=1" />
